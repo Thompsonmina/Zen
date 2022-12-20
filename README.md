@@ -1,0 +1,1 @@
+Run this docker image to create a xampp docker container. https://github.com/tomsik68/docker-xampp
