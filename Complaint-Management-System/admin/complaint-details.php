@@ -144,11 +144,11 @@ while($rw=mysqli_fetch_array($ret))
 											<?php if($row['status']=="closed"){
 
 												} else {?>
-<a href="javascript:void(0);" onClick="popUpWindow('http://localhost/Complaint Management System/admin/updatecomplaint.php?cid=<?php echo htmlentities($row['complaintNumber']);?>');" title="Update order">
+<a href="javascript:void(0);" onClick="popUpWindow('http://localhost/Complaint-Management-System/admin/updatecomplaint.php?cid=<?php echo htmlentities($row['complaintNumber']);?>');" title="Update order">
 											 <button type="button" class="btn btn-primary">Take Action</button></td>
 											</a><?php } ?></td>
 											<td colspan="4"> 
-											<a href="javascript:void(0);" onClick="popUpWindow('http://localhost/Complaint Management System/admin/userprofile.php?uid=<?php echo htmlentities($row['userId']);?>');" title="Update order">
+											<a href="javascript:void(0);" onClick="popUpWindow('http://localhost/Complaint-Management-System/admin/userprofile.php?uid=<?php echo htmlentities($row['userId']);?>');" title="Update order">
 											 <button type="button" class="btn btn-primary">View User Detials</button></a></td>
 											
 										</tr>

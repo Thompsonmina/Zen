@@ -2,6 +2,7 @@
 session_start();
 error_reporting(0);
 include("includes/config.php");
+include("includes/utils.php")
 if(isset($_POST['submit']))
 {
 $ret=mysqli_query($bd, "SELECT * FROM users WHERE userEmail='".$_POST['username']."' and password='".md5($_POST['password'])."'");
@@ -27,6 +28,8 @@ $status=0;
 mysqli_query($bd, "insert into userlog(username,userip,status) values('".$_SESSION['login']."','$uip','$status')");
 $errormsg="Invalid username or password";
 $extra="login.php";
+console_log($extra);
+header("location:http://$host$uri/$extra");
 
 }
 }
