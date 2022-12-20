@@ -2,59 +2,74 @@
 session_start();
 error_reporting(0);
 include("includes/config.php");
-include("includes/utils.php")
+include("includes/utils.php");
+
+
+$host=$_SERVER['HTTP_HOST'];
+
 if(isset($_POST['submit']))
 {
 $ret=mysqli_query($bd, "SELECT * FROM users WHERE userEmail='".$_POST['username']."' and password='".md5($_POST['password'])."'");
 $num=mysqli_fetch_array($ret);
+
 if($num>0)
 {
-$extra="change-password.php";//
+console_log("omo");
+$extra="dashboard.php";//
 $_SESSION['login']=$_POST['username'];
 $_SESSION['id']=$num['id'];
-$host=$_SERVER['HTTP_HOST'];
 $uip=$_SERVER['REMOTE_ADDR'];
+console_log("hmmm");
 $status=1;
-$log=mysqli_query($bd, "insert into userlog(uid,username,userip,status) values('".$_SESSION['id']."','".$_SESSION['login']."','$uip','$status')");
+// $log=mysqli_query($bd, "insert into userlog(uid,username,userip,status) values('".$_SESSION['id']."','".$_SESSION['login']."','$uip','$status')");
+// console_log($log);
 $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+console_log("location:http://$host$uri/$extra");
 header("location:http://$host$uri/$extra");
+
 exit();
 }
 else
 {
+console_log("i should be here too");
 $_SESSION['login']=$_POST['username'];	
 $uip=$_SERVER['REMOTE_ADDR'];
 $status=0;
-mysqli_query($bd, "insert into userlog(username,userip,status) values('".$_SESSION['login']."','$uip','$status')");
+
+# this query is messing stuff up. Investigate later
+// mysqli_query($bd, "insert into userlog(username,userip,status) values('".$_SESSION['login']."','$uip','$status')");
 $errormsg="Invalid username or password";
 $extra="login.php";
-console_log($extra);
-header("location:http://$host$uri/$extra");
+console_log("location:http://$host$uri/$extra");
+// header("location:http://$host$uri/$extra");
 
 }
 }
 
 
+# there seems to be two change password functionalities weird, kill this for now
+// if(isset($_POST['change']))
+// {
+//    $email=$_POST['email'];
+//     $contact=$_POST['contact'];
+//     $password=md5($_POST['password']);
+// $query=mysqli_query($bd, "SELECT * FROM users WHERE userEmail='$email' and contactNo='$contact'");
+// $num=mysqli_fetch_array($query);
+// if($num>0)
+// {
+// mysqli_query($bd, "update users set password='$password' WHERE userEmail='$email' and contactNo='$contact' ");
+// $msg="Password Changed Successfully";
+// console_log("could it be change");
+// }
+// else
+// {
+// $errormsg="Invalid email id or Contact no";
+// }
+// }
+// console_log("got in here at least tright too aye?");
 
-if(isset($_POST['change']))
-{
-   $email=$_POST['email'];
-    $contact=$_POST['contact'];
-    $password=md5($_POST['password']);
-$query=mysqli_query($bd, "SELECT * FROM users WHERE userEmail='$email' and contactNo='$contact'");
-$num=mysqli_fetch_array($query);
-if($num>0)
-{
-mysqli_query($bd, "update users set password='$password' WHERE userEmail='$email' and contactNo='$contact' ");
-$msg="Password Changed Successfully";
-
-}
-else
-{
-$errormsg="Invalid email id or Contact no";
-}
-}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
