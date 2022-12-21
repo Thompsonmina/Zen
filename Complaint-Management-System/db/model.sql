@@ -7,6 +7,10 @@
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
+DROP DATABASE cms;
+CREATE DATABASE IF NOT EXISTS cms;
+USE cms;
+
 
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -33,7 +37,7 @@ CREATE TABLE `admin` (
 
 -- Dumping data for table `admin`
 
-INSERT INTO `admin` (`id`, `username`, `password`, `updateDate`) VALUES
+INSERT INTO `admin` (`id`, `username`, `password_hash`, `updateDate`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '08-05-2020 07:23:45 PM');
 
 
@@ -64,7 +68,7 @@ CREATE TABLE student (
   `fullName` varchar(255) NOT NULL,
   `userEmail` varchar(255) DEFAULT NULL,
   `password_hash` varchar(255) DEFAULT NULL,
-  `matric_number` varchar(255) NOT NULL
+  `matric_number` varchar(255) NOT NULL,
 
   UNIQUE(matric_number)
 );
