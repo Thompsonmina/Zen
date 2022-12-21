@@ -65,6 +65,8 @@ CREATE TABLE student (
   `userEmail` varchar(255) DEFAULT NULL,
   `password_hash` varchar(255) DEFAULT NULL,
   `matric_number` varchar(255) NOT NULL
+
+  UNIQUE(matric_number)
 );
 
 CREATE TABLE complaint (

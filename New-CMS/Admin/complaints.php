@@ -2,7 +2,7 @@
 <?php
 session_start();
 include('../config.php');
-include("helpers.php");
+include("../renderers.php");
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:login.php');
