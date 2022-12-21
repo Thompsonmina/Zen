@@ -60,7 +60,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 					<div class="content">
 
 
-					<?php echo displayComplaints($status_num, $all);?>
+					<?php echo displayComplaints($bd, $status_num, $all);?>
 					
 	
 					</div><!--/.content-->

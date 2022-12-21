@@ -66,7 +66,7 @@ check_login_user();
                                 <?php 
            
 $status=1;
-$rt = mysqli_query($bd, "SELECT * FROM complaint JOIN student s where status='$status' and s.matric_number = {$_SESSION['login']}");
+$rt = mysqli_query($bd, "SELECT * FROM complaint c JOIN lecturer l where status='$status' and l.email = {$_SESSION['login_lecturer']}");
 $num_rows = mysqli_num_rows($rt);
 {?>
 					  			<h3><?php echo htmlentities($num_rows);?></h3>
@@ -84,7 +84,7 @@ $num_rows = mysqli_num_rows($rt);
                   <span class="li_news"></span>
                     <?php 
 $status=2;                   
-$rt = mysqli_query($bd, "SELECT * FROM complaint JOIN student s where status='$status' and s.matric_number = {$_SESSION['login']}");
+$rt = mysqli_query($bd, "SELECT * FROM complaint c JOIN lecturer l where status='$status' and l.email = {$_SESSION['login_lecturer']}");
 $num_rows = mysqli_num_rows($rt);
 {?>
                   <h3><?php echo htmlentities($num_rows);?></h3>
@@ -100,7 +100,7 @@ $num_rows = mysqli_num_rows($rt);
                   <span class="li_news"></span>
                        <?php 
 $status=3;                   
-$rt = mysqli_query($bd, "SELECT * FROM complaint JOIN student s where status='$status' and s.matric_number = {$_SESSION['login']}");
+$rt = mysqli_query($bd, "SELECT * FROM complaint c JOIN lecturer l where status='$status' and l.email = {$_SESSION['login_lecturer']}");
 $num_rows = mysqli_num_rows($rt);
 {?>
                   <h3><?php echo htmlentities($num_rows);?></h3>

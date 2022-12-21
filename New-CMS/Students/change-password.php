@@ -8,22 +8,18 @@ include("../utils.php");
 
 check_login_user();
 
-$currentTime = date( 'd-m-Y h:i:s A', time () );
-
-
 if(isset($_POST['submit']))
 {
-  $fullname=$_POST['fullname'];
-	$email=$_POST['email'];
-	$matric = $_POST['matric'];
-$query=mysqli_query($bd, "update users set fullName='$fullname',userEmail='$email' where matric_number='".$_SESSION['login']."'");
-if($query)
+$sql=mysqli_query($bd, "SELECT password_hash FROM  users where password_hash='".md5($_POST['password'])."' && matric_number='".$_SESSION['login']."'");
+$num=mysqli_fetch_array($sql);
+if($num>0)
 {
-$successmsg="Profile Updated !!";
+ $con=mysqli_query($bd, "update users set password='".md5($_POST['newpassword'])." where matric_number='".$_SESSION['login']."'");
+$successmsg="Password Changed Successfully !!";
 }
 else
 {
-$errormsg="Profile not Updated !!";
+$errormsg="Old Password not match !!";
 }
 }
 ?>
@@ -37,7 +33,7 @@ $errormsg="Profile not Updated !!";
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>CMS | User Change Password</title>
+    <title>CMS | Student Change Password</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -47,7 +43,36 @@ $errormsg="Profile not Updated !!";
     <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-  
+  <script type="text/javascript">
+function valid()
+{
+if(document.chngpwd.password.value=="")
+{
+alert("Current Password Filed is Empty !!");
+document.chngpwd.password.focus();
+return false;
+}
+else if(document.chngpwd.newpassword.value=="")
+{
+alert("New Password Filed is Empty !!");
+document.chngpwd.newpassword.focus();
+return false;
+}
+else if(document.chngpwd.confirmpassword.value=="")
+{
+alert("Confirm Password Filed is Empty !!");
+document.chngpwd.confirmpassword.focus();
+return false;
+}
+else if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
+{
+alert("Password and Confirm Password Field do not match  !!");
+document.chngpwd.confirmpassword.focus();
+return false;
+}
+return true;
+}
+</script>
   </head>
 
   <body>
@@ -57,13 +82,13 @@ $errormsg="Profile not Updated !!";
       <?php include("includes/sidebar.php");?>
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Profile info</h3>
+          	<h3><i class="fa fa-angle-right"></i> Change Password</h3>
           	
           	<!-- BASIC FORM ELELEMNTS -->
           	<div class="row mt">
           		<div class="col-lg-12">
                   <div class="form-panel">
-                  	
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> User Change Password</h4>
 
                       <?php if($successmsg)
                       {?>
@@ -78,34 +103,29 @@ $errormsg="Profile not Updated !!";
  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                       <b>Oh snap!</b> </b> <?php echo htmlentities($errormsg);?></div>
                       <?php }?>
- <?php $query=mysqli_query($bd, "select * from student where matric_number='".$_SESSION['login']."'");
- while($row=mysqli_fetch_array($query)) 
- {
- ?>                     
 
-  <h4 class="mb"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php echo htmlentities($row['fullName']);?>'s Profile</h4>
-    <h5><b>Last Updated at :</b>&nbsp;&nbsp;<?php echo htmlentities($row['updationDate']);?></h5>
-                      <form class="form-horizontal style-form" method="post" name="profile" >
+
+                      <form class="form-horizontal style-form" method="post" name="chngpwd" onSubmit="return valid();">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Current Password</label>
+                              <div class="col-sm-10">
+                                  <input type="password" name="password" required="required" class="form-control">
+                              </div>
+                          </div>
 
 <div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Full Name</label>
-<div class="col-sm-4">
-<input type="text" name="fullname" required="required" value="<?php echo htmlentities($row['fullName']);?>" class="form-control" >
- </div>
-<label class="col-sm-2 col-sm-2 control-label">User Email </label>
- <div class="col-sm-4">
-<input type="email" name="email" required="required" value="<?php echo htmlentities($row['userEmail']);?>" class="form-control">
-</div>
- </div>
+                              <label class="col-sm-2 col-sm-2 control-label">New Password</label>
+                              <div class="col-sm-10">
+                                  <input type="password" name="newpassword" required="required" class="form-control">
+                              </div>
+                          </div>
 
- <label class="col-sm-2 col-sm-2 control-label">Matric Number</label>
- <div class="col-sm-4">
-<input type="email" name="matric" required="required" value="<?php echo htmlentities($row['matric_number']);?>" class="form-control" readonly>
-</div>
-
-
-<?php } ?>
-
+<div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Confirm Password</label>
+                              <div class="col-sm-10">
+                                  <input type="password" name="confirmpassword" required="required" class="form-control">
+                              </div>
+                          </div>
                           <div class="form-group">
                            <div class="col-sm-10" style="padding-left:25% ">
 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -119,8 +139,8 @@ $errormsg="Profile not Updated !!";
                           
           	
           	
-		</section>
-      </section>
+		</section><! --/wrapper -->
+      </section><!-- /MAIN CONTENT -->
     <?php include("includes/footer.php");?>
   </section>
 

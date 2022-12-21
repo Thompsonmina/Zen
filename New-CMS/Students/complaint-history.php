@@ -1,13 +1,15 @@
-<?php 
+<?php
 session_start();
 error_reporting(0);
 include('../config.php');
-include('../renderers.php');
-if(strlen($_SESSION['login'])==0)
-  { 
-header('location:index.php');
-}
-else{
+include("../utils.php");
+include("../renderers.php");
+
+console_log("atta boy");
+
+
+check_login_user();
+console_log("atta boy");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,12 +48,18 @@ else{
 
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i>Your Complaint Hstory</h3>
+          	<h3><i class="fa fa-angle-right"></i>Your Complaint History</h3>
 		  		<div class="row mt">
 			  		<div class="col-lg-12">
                       <div class="content-panel">
                           <section id="unseen">
-                          <?php echo displayComplaints(0, True);?>
+                            theym
+                          <?php console_log("huh") ?>
+                          <?php 
+                          $additional_where_clause = "s.matric_number = {$_SESSION['login']}";
+                          echo displayComplaints($bd, 1, True, $additional_where_clause);?>
+                          <?php console_log("Whats up") ?>
+                          
 
                           </section>
                   </div><!-- /content-panel -->
@@ -81,4 +89,3 @@ else{
 
   </body>
 </html>
-<?php } ?>

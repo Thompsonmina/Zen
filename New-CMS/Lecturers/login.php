@@ -10,14 +10,14 @@ $host=$_SERVER['HTTP_HOST'];
 
 if(isset($_POST['submit']))
 {
-$ret=mysqli_query($bd, "SELECT * FROM student WHERE matric_number='".$_POST['matric']."' and password_hash='".md5($_POST['password'])."'");
+$ret=mysqli_query($bd, "SELECT * FROM lecturer WHERE email='".$_POST['email']."' and password_hash='".md5($_POST['password'])."'");
 $num=mysqli_fetch_array($ret);
 
 if($num>0)
 {
 console_log("omo");
 $extra="dashboard.php";//
-$_SESSION['login']=$_POST['matric'];
+$_SESSION['login_lecturer']=$_POST['email'];
 $_SESSION['id']=$num['id'];
 $uip=$_SERVER['REMOTE_ADDR'];
 console_log("hmmm");
@@ -88,21 +88,14 @@ echo htmlentities($errormsg);
 echo htmlentities($msg);
 		        		}?></p>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" name="matric" placeholder="Matric Number"  required autofocus>
+		            <input type="text" class="form-control" name="email" placeholder="Email Address"  required autofocus>
 		            <br>
 		            <input type="password" class="form-control" name="password" required placeholder="Password">
 		            <label class="checkbox">
 		            </label>
 		            <button class="btn btn-theme btn-block" name="submit" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		            <hr>
-		           </form>
-		            <div class="registration">
-		                Don't have an account yet?<br/>
-		                <a class="" href="registration.php">
-		                    Create an account
-		                </a>
-		            </div>
-		
+		           </form>		            
 		        </div>
 	  	
 	  	</div>

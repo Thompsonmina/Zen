@@ -76,7 +76,7 @@ CREATE TABLE complaint (
   `lecturer_id` INT NOT NULL,
   `complaint_text` TEXT NOT NULL,
   `regDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` INT NOT NULL DEFAULT 0,
+  `status` INT NOT NULL DEFAULT 1,
   `lastUpdateDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   
   FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE CASCADE,

@@ -8,4 +8,12 @@ function console_log($output, $with_script_tags = true) {
     }
     echo $js_code;
 }
+
+function check_login_user(){
+    if(strlen($_SESSION['login'])==0)
+    { 
+    header('location:login.php');
+    }
+  }
+  
 ?>
