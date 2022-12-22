@@ -1,9 +1,7 @@
 <?php
 session_start();
-error_reporting(0);
 include("../config.php");
 include("../utils.php");
-console_log("weird");
 
 if(isset($_POST['submit']))
 {
@@ -66,12 +64,6 @@ if(isset($_POST['submit']))
 				</div>
 				
 			</form>
-		</div>
-	</div>
-
-	<div class="footer">
-		<div class="container">
-			<b class="copyright">&copy; 2020 CMS </b> All rights reserved.
 		</div>
 	</div>
 </body>

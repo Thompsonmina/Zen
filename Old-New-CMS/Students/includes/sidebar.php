@@ -1,8 +1,3 @@
-
-<<?php
-session_start();
-error_reporting(0);
-?>
 <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
@@ -36,17 +31,12 @@ error_reporting(0);
                       </ul>
                   </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
-                          <span>Courses</span>
+                      <a href="register-complaint.php" >
+                          <i class="fa fa-book"></i>
+                          <span> Make a Complaint</span>
                       </a>
-                      <ul class="sub">
-                          <li><a  href="profile.php">Profile</a></li>
-                          <li><a  href="change-password.php">Change Password</a></li>
-                        
-                      </ul>
+                    </li>
                   </li>
-                  
                   <li class="sub-menu">
                       <a href="complaint-history.php" >
                           <i class="fa fa-tasks"></i>

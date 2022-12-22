@@ -1,20 +1,24 @@
 <?php
 session_start();
-error_reporting(0);
+ini_set ('display_errors', 1);
+ini_set ('display_startup_errors', 1);
+error_reporting (E_ALL);
 include('../config.php');
 include("../utils.php");
+include("../renderers.php");
 
 
 
-check_login_user();
+check_login_lecturer();
 
 if(isset($_POST['submit']))
 {
-$sql=mysqli_query($bd, "SELECT password_hash FROM  student where password_hash='".md5($_POST['password'])."' && matric_number='".$_SESSION['login']."'");
+$sql=mysqli_query($bd, "SELECT password_hash FROM  lecturer where password_hash='".md5($_POST['password'])."' && email='".$_SESSION['login_lecturer']."'");
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
- $con=mysqli_query($bd, "update student set password='".md5($_POST['newpassword'])." where matric_number='".$_SESSION['login']."'");
+    echo "update lecturer set password='" . md5($_POST['newpassword']) . " where email='" . $_SESSION['login_lecturer'] . "'";
+ $con=mysqli_query($bd, "update lecturer set password_hash='".md5($_POST['newpassword'])."' where email='".$_SESSION['login_lecturer']."'");
 $successmsg="Password Changed Successfully !!";
 }
 else
@@ -33,16 +37,53 @@ $errormsg="Old Password not match !!";
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>CMS | Student Change Password</title>
+    <title>CMS | Change Password</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+  <script type="text/javascript">
+function valid()
+{
+if(document.chngpwd.password.value=="")
+{
+alert("Current Password Filed is Empty !!");
+document.chngpwd.password.focus();
+return false;
+}
+else if(document.chngpwd.newpassword.value=="")
+{
+alert("New Password Filed is Empty !!");
+document.chngpwd.newpassword.focus();
+return false;
+}
+else if(document.chngpwd.confirmpassword.value=="")
+{
+alert("Confirm Password Filed is Empty !!");
+document.chngpwd.confirmpassword.focus();
+return false;
+}
+else if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
+{
+alert("Password and Confirm Password Field do not match  !!");
+document.chngpwd.confirmpassword.focus();
+return false;
+}
+return true;
+}
+</script>
   </head>
 
   <body>
 
   <section id="container" >
      <?php include("includes/header.php");?>
-      <?php include("includes/sidebar.php");?>
+     <?php echo displayLecturerSidebar($bd, $_SESSION['id']);?>
       <section id="main-content">
           <section class="wrapper">
           	<h3><i class="fa fa-angle-right"></i> Change Password</h3>
@@ -51,7 +92,7 @@ $errormsg="Old Password not match !!";
           	<div class="row mt">
           		<div class="col-lg-12">
                   <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> User Change Password</h4>
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Change Password</h4>
 
                       <?php if($successmsg)
                       {?>

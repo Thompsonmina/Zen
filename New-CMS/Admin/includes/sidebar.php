@@ -45,7 +45,7 @@
 		</ul>
 	</li>			
 	<li>
-		<a href="manage-users.php">
+		<a href="manage-students.php">
 			<i class="menu-icon icon-group"></i>
 			Manage Students
 		</a>
@@ -56,9 +56,3 @@
 	<li class="w-full"><a class="w-full" href="manage_courses.php">Manage Courses </a></li>
 </ul>
 	
-<!-- <div > -->
-<!-- <div class="h-screen w-2/5 max-w-xs border-r border-black p-2 flex flex-col"> -->
-<!-- </div> -->
-
-
-

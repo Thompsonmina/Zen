@@ -22,11 +22,12 @@ if(strlen($_SESSION['login_lecturer'])==0)
     header('location:login.php');
     }
 }
-  
+
 function check_login_admin(){
     if(strlen($_SESSION['alogin'])==0)
     {	
     header('location:login.php');
     }
 }
+  
 ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../config.php");
-$_SESSION['login']=="";
+$_SESSION['login_lecturer']=="";
 $ldate=date( 'd-m-Y h:i:s A', time () );
 session_unset();
 

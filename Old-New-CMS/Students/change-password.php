@@ -35,7 +35,44 @@ $errormsg="Old Password not match !!";
 
     <title>CMS | Student Change Password</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+  <script type="text/javascript">
+function valid()
+{
+if(document.chngpwd.password.value=="")
+{
+alert("Current Password Filed is Empty !!");
+document.chngpwd.password.focus();
+return false;
+}
+else if(document.chngpwd.newpassword.value=="")
+{
+alert("New Password Filed is Empty !!");
+document.chngpwd.newpassword.focus();
+return false;
+}
+else if(document.chngpwd.confirmpassword.value=="")
+{
+alert("Confirm Password Filed is Empty !!");
+document.chngpwd.confirmpassword.focus();
+return false;
+}
+else if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
+{
+alert("Password and Confirm Password Field do not match  !!");
+document.chngpwd.confirmpassword.focus();
+return false;
+}
+return true;
+}
+</script>
   </head>
 
   <body>

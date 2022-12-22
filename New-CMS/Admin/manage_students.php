@@ -3,7 +3,12 @@
 session_start();
 include('../config.php');
 include('../utils.php');
-check_login_admin();
+if(strlen($_SESSION['alogin'])==0)
+	{	
+header('location:index.php');
+}
+else{
+date_default_timezone_set('Asia/Kolkata');// change according timezone
 $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 
@@ -11,25 +16,20 @@ if(isset($_POST['submit']))
 {
 	$fullname=$_POST['fullname'];
 	$email=$_POST['email'];
+    $matric = $_POST['matric'];
     $password=$_POST["password"];
     $pass_hash= md5($_POST['password']);
 
-$sql=mysqli_query($bd, "insert into lecturer(fullname,email,password_hash) values('$fullname','$email', '$pass_hash')");
-$_SESSION['msg']="Coue Created !!";
+$sql=mysqli_query($bd, "insert into student(fullname,userEmail,password_hash, matric_number) values('$fullname','$email', '$pass_hash', '$matric')");
+$_SESSION['msg']="Student Created !!";
 console_log("hazzah");
 $host=$_SERVER['HTTP_HOST'];
 $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/manage_lecturers.php");
+header("location:http://$host$uri/manage_students.php");
 
 }
-
-if(isset($_GET['del']))
-		  {
-		          mysqli_query($bd, "delete from lecturer where id = '".$_GET['id']."'");
-                  $_SESSION['delmsg']="Lecturer Removed !!";
-		  }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@ if(isset($_GET['del']))
 			<div class="span9 w-full">
 					<div class="p-8 w-full">
 						<div class="">
-							<h3 class="text-xl font-bold">New Lecturer</h3>
+							<h3 class="text-xl font-bold">New Student</h3>
 						</div>
 							<div class="module-body">
 								<?php if(isset($_POST['submit']))
@@ -78,15 +78,20 @@ if(isset($_GET['del']))
 
 									<br />
 
-			<form name="Lecturer" class="flex flex-col gap-y-5 w-full  max-w-xs" method="post">
-				<div class="w-full">
-					<label class="block" for="basicinput">Lecturer Full Name</label>
-					<input class="w-full p-2 border border-gray-300 rounded" placeholder="Enter Lecturer Fullname"  name="fullname" class="span8 tip" required>
+			<form name="Student" class="flex flex-col gap-y-5 w-full  max-w-xs" method="post">
+            <div class="w-full">
+					<label class="block" for="basicinput">Student Matric</label>
+					<input class="w-full p-2 border border-gray-300 rounded" placeholder="Enter Student Matric Number"  name="matric" class="span8 tip" required>
+				</div>
+
+                <div class="w-full">
+					<label class="block" for="basicinput">Student Full Name</label>
+					<input class="w-full p-2 border border-gray-300 rounded" placeholder="Enter Student Fullname"  name="fullname" class="span8 tip" required>
 				</div>
 
 				<div class="w-full">	
-					<label class="block" for="basicinput">Lecturer Email Address</label>
-					<input class="w-full p-2 border border-gray-300 rounded" placeholder="Enter Lecturer Email Address"  name="email" class="span8 tip" required>
+					<label class="block" for="basicinput">Student Email Address</label>
+					<input class="w-full p-2 border border-gray-300 rounded" placeholder="Enter Student Email Address"  name="email" class="span8 tip" required>
 				</div>
 
 				<div class="w-full">
@@ -102,29 +107,31 @@ if(isset($_GET['del']))
 
 	<div class="p-8">
 		<div class="module-head">
-			<h3 class="text-xl font-bold mb-4">Manage Lecturers</h3>
+			<h3 class="text-xl font-bold mb-4">Manage Students</h3>
 		</div>
 		<div class="overflow-x-scroll">
 			<table class="table-auto w-full" cellspacing="0" cellpadding="0" border="0" width="20rem">
 				<thead>
 					<tr>
-						<th class="text-left">#</th>
+                    <th class="text-left">#</th>
+                    <th class="text-left">Matric Number</th>
+                        
 						<th class="text-left">Fullname</th>
 						<th class="text-left">Email Address</th>
 					</tr>
 				</thead>
 				<tbody>
 
-<?php $query=mysqli_query($bd, "select * from lecturer");
+<?php $query=mysqli_query($bd, "select * from student");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
 ?>									
 										<tr class="cursor-pointer">
 											<td><?php echo htmlentities($cnt);?></td>
+											<td><?php echo htmlentities($row['matric_number']);?></td>
 											<td><?php echo htmlentities($row['fullName']);?></td>
-											<td><?php echo htmlentities($row['email']);?></td>
-                                            <!-- maybe thier courses -->
+											<td><?php echo htmlentities($row['userEmail']);?></td>
 											<td>
 											<a href="category.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"><i class="icon-remove-sign"></i></a></td>
 										</tr>
@@ -141,6 +148,5 @@ while($row=mysqli_fetch_array($query))
 			</div>
 		</div><!--/.container-->
 	</div><!--/.wrapper-->
-
-<?php include('includes/footer.php');?>
 </body>
+<?php } ?>
