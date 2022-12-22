@@ -4,44 +4,45 @@ error_reporting(0);
 include("../config.php");
 include("../utils.php");
 
-console_log("omo x 2");
 
 $host=$_SERVER['HTTP_HOST'];
 
 if(isset($_POST['submit']))
 {
-$ret=mysqli_query($bd, "SELECT * FROM lecturer WHERE email='".$_POST['email']."' and password_hash='".md5($_POST['password'])."'");
-$num=mysqli_fetch_array($ret);
+  $email = $_POST['email'];
+  $hashed_password = md5($_POST['password']);
+  $ret=mysqli_query($bd, "SELECT * FROM lecturer WHERE email='$email' and password_hash='$hashed_password'");
+  
+  // $ret=mysqli_query($bd, "SELECT * FROM lecturer WHERE email='".$_POST['email']."' and password_hash='".md5($_POST['password'])."'");
+  $num=mysqli_fetch_array($ret);
+  
+  console_log("omo x 2".$ret);
+  if($num>0)
+  {
+    console_log("omo");
+    $extra="dashboard.php";//
+    $_SESSION['login_lecturer']=$_POST['email'];
+    $_SESSION['id']=$num['id'];
+    $uip=$_SERVER['REMOTE_ADDR'];
+    console_log("hmmm");
 
-if($num>0)
-{
-console_log("omo");
-$extra="dashboard.php";//
-$_SESSION['login_lecturer']=$_POST['email'];
-$_SESSION['id']=$num['id'];
-$uip=$_SERVER['REMOTE_ADDR'];
-console_log("hmmm");
+    $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+    header("location:http://$host$uri/$extra");
 
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
+    exit();
+  }
+  else
+  {
+    console_log("i should be here too");
+    $uip=$_SERVER['REMOTE_ADDR'];
+    $status=0;
 
-exit();
+    $errormsg="Invalid username or password";
+    $extra="login.php";
+    $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+    header("location:http://$host$uri/$extra");
+  }
 }
-else
-{
-console_log("i should be here too");
-$uip=$_SERVER['REMOTE_ADDR'];
-$status=0;
-
-$errormsg="Invalid username or password";
-$extra="login.php";
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-
-}
-}
-
-
 ?>
 
 
@@ -56,62 +57,43 @@ header("location:http://$host$uri/$extra");
 
     <title>CMS | User Login</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-
+    <nav class="border-b border-black p-3 flex flex-col items-start sm:flex-row sm:items-center gap-x-5" role="navigation">
+      <a href="/New-CMS">
+        <h1 class="font-mono text-4xl font-bold">cms</h1>
+      </a>  
+    </nav>
+    
 	  <div id="login-page">
 	  	<div class="container">
-	  	
-		      <form class="form-login" name="login" method="post">
-		        <h2 class="form-login-heading">sign in now</h2>
+		      <form class="mx-auto max-w-md py-10" name="login" method="post">
+		        <h2 class="text-center text-xl font-bold">Lecturer Sign in</h2>
 		        <p style="padding-left:4%; padding-top:2%;  color:red">
-		        	<?php if($errormsg){
-echo htmlentities($errormsg);
-		        		}?></p>
+		        	<?php
+                if($errormsg){
+                  echo htmlentities($errormsg);
+		        		}
+              ?>
+            </p>
 
-		        		<p style="padding-left:4%; padding-top:2%;  color:green">
-		        	<?php if($msg){
-echo htmlentities($msg);
-		        		}?></p>
-		        <div class="login-wrap">
-		            <input type="text" class="form-control" name="email" placeholder="Email Address"  required autofocus>
-		            <br>
-		            <input type="password" class="form-control" name="password" required placeholder="Password">
-		            <label class="checkbox">
-		            </label>
-		            <button class="btn btn-theme btn-block" name="submit" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
-		            <hr>
-		           </form>		            
-		        </div>
-	  	
-	  	</div>
+		        <p style="padding-left:4%; padding-top:2%;  color:green">
+		        	<?php
+                if($msg){
+                  echo htmlentities($msg);
+		        		}
+              ?>
+            </p>
+            <div class="flex flex-col gap-y-5">
+              <input class="p-2 border border-gray-300" type="text" name="email" placeholder="Email Address"  required autofocus>
+              <input class="p-2 border border-gray-300" type="password" name="password" required placeholder="Password">
+              <button class="w-full bg-yellow-500 p-2 text-white font-bold rounded" name="submit" type="submit" name="submit" type="submit">Submit</button>
+            </div>
+          </form>		            
+      </div>
 	  </div>
-
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <!--BACKSTRETCH-->
-    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
-    <script>
-        $.backstretch("assets/img/login-bg.jpg", {speed: 500});
-    </script>
-
 
   </body>
 </html>

@@ -2,32 +2,26 @@
 <?php
 
 
-function displayComplaints($conn, $status, $all=False, $custom_query=""){
+function displayComplaints($conn, $stat_name, $status, $all=False, $custom_query=""){
 	$status_map = array(1=> "Pending", 2 => "In Progress", 3 => "Closed");
 
-    $html_beginning = <<<'EOD'
-    <div class="module">
-							<div class="module-head">
-								<h3>Pending Complaints</h3>
+    $html_beginning = <<<EOD
+				<div class="p-4 overflow-hidden">
+							<div class="mb-4 text-xl font-bold">
+								<h3>$stat_name Complaints</h3>
 							</div>
-							<div class="module-body table">
-
-
-							
-								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" >
+							<div class="overflow-x-scroll w-full">							
+								<table cellpadding="0" cellspacing="0" border="0" class="table-auto" >
 									<thead>
 										<tr>
-											<th>Complaint No</th>
-											<th> Complaint </th>
-											<th> Complainer's Matric</th>
-											<th> Lecturer's Name </th>
-											<th> Course Code</th>
-											<th>Reg Date</th>
-											<th>Status</th>
-											
-											<th>Action</th>
-											
-										
+											<th class="text-left whitespace-nowrap px-4">Complaint No</th>
+											<th class="text-left whitespace-nowrap px-4">Complaint </th>
+											<th class="text-left whitespace-nowrap px-4">Complainer's Matric</th>
+											<th class="text-left whitespace-nowrap px-4">Lecturer's Name </th>
+											<th class="text-left whitespace-nowrap px-4">Course Code</th>
+											<th class="text-left whitespace-nowrap px-4">Reg Date</th>
+											<th class="text-left whitespace-nowrap px-4">Status</th>
+											<th class="text-left whitespace-nowrap px-4">Action</th>
 										</tr>
 									</thead>
 								
@@ -35,7 +29,6 @@ function displayComplaints($conn, $status, $all=False, $custom_query=""){
 EOD;
 
 $stat = $status;
-echo $stat;
 $query_str = "SELECT c.id, c.complaint_text, c.regDate, c.status, s.matric_number, l.fullName, co.code FROM complaint c JOIN student s ON c.student_id = s.id JOIN lecturer l ON c.lecturer_id = l.id JOIN course co ON c.course_id = co.id WHERE c.status = $stat";
 
 if ($all){
@@ -56,7 +49,7 @@ while($row=mysqli_fetch_assoc($query))
 {
 
 	$table_part = <<<EOD
-	 <tr>
+	 <tr class="cursor-pointer">
 											<td>{$row["id"]}</td>
 											<td>{$row['complaint_text']}</td>
 											<td>{$row['matric_number']}</td>

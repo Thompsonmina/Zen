@@ -53,31 +53,22 @@ header("location:http://$host$uri/$extra");
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <title>CMS | User Login</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-
   </head>
 
   <body>
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-
-	  <div id="login-page">
-	  	<div class="container">
-	  	
-		      <form class="form-login" name="login" method="post">
-		        <h2 class="form-login-heading">sign in now</h2>
+    <nav class="border-b border-black p-3 flex flex-col items-start sm:flex-row sm:items-center gap-x-5" role="navigation">
+      <a href="/New-CMS">
+        <h1 class="font-mono text-4xl font-bold">cms</h1>
+      </a>  
+    </nav>
+	  
+    <div id="login-page">
+	  	<div>
+		      <form class="mx-auto max-w-md py-10" name="login" method="post">
+		        <h2 class="text-center text-xl font-bold">Students Sign In</h2>
 		        <p style="padding-left:4%; padding-top:2%;  color:red">
 		        	<?php if($errormsg){
 echo htmlentities($errormsg);
@@ -87,38 +78,23 @@ echo htmlentities($errormsg);
 		        	<?php if($msg){
 echo htmlentities($msg);
 		        		}?></p>
-		        <div class="login-wrap">
-		            <input type="text" class="form-control" name="matric" placeholder="Matric Number"  required autofocus>
-		            <br>
-		            <input type="password" class="form-control" name="password" required placeholder="Password">
-		            <label class="checkbox">
-		            </label>
-		            <button class="btn btn-theme btn-block" name="submit" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
-		            <hr>
-		           </form>
-		            <div class="registration">
-		                Don't have an account yet?<br/>
-		                <a class="" href="registration.php">
+		        <div class="flex flex-col gap-y-5">
+		            <input class="p-2 border border-gray-300" type="text" name="matric" placeholder="Matric Number"  required autofocus>
+		            
+		            <input class="p-2 border border-gray-300" type="password" name="password" required placeholder="Password">
+
+		            <button class="w-full bg-yellow-500 p-2 text-white font-bold rounded" name="submit" type="submit">Submit</button>
+		        </form>
+		        
+		            <div class="">
+		                Don't have an account yet?
+		                <a class="underline" href="registration.php">
 		                    Create an account
 		                </a>
 		            </div>
-		
 		        </div>
 	  	
 	  	</div>
 	  </div>
-
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <!--BACKSTRETCH-->
-    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
-    <script>
-        $.backstretch("assets/img/login-bg.jpg", {speed: 500});
-    </script>
-
-
   </body>
 </html>

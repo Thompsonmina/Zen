@@ -35,12 +35,15 @@ if(isset($_GET['del']))
 		  }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin| Manage Course</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+
 	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -49,27 +52,25 @@ if(isset($_GET['del']))
 </head>
 <body>
 <?php include('includes/header.php');?>
-
 	<div class="wrapper">
-		<div class="container">
-			<div class="row">
-<?php include('includes/sidebar.php');?>				
-			<div class="span9">
-					<div class="content">
+		<div class="">
+			<div class="flex w-full">
+			<?php include('includes/sidebar.php');?>				
 
-						<div class="module">
-							<div class="module-head">
-								<h3>Lecturer</h3>
-							</div>
+			<div class="span9 w-full">
+					<div class="p-8 w-full">
+						<div class="">
+							<h3 class="text-xl font-bold">New Lecturer</h3>
+						</div>
 							<div class="module-body">
+								<?php if(isset($_POST['submit']))
 
-									<?php if(isset($_POST['submit']))
-{?>
+								{?>
 									<div class="alert alert-success">
 										<button type="button" class="close" data-dismiss="alert">×</button>
 									<strong>Well done!</strong>	<?php echo htmlentities($_SESSION['msg']);?><?php echo htmlentities($_SESSION['msg']="");?>
 									</div>
-<?php } ?>
+							<?php } ?>
 
 
 									<?php if(isset($_GET['del']))
@@ -82,59 +83,49 @@ if(isset($_GET['del']))
 
 									<br />
 
-			<form class="form-horizontal row-fluid" name="Course" method="post" >
-									
-<div class="control-group">
-<label class="control-label" for="basicinput">Lecturer Full Name</label>
-<div class="controls">
-<input type="text" placeholder="Enter Lecturer Fullname"  name="fullname" class="span8 tip" required>
-</div>
-<label class="control-label" for="basicinput">Lecturer Email Address</label>
-<div class="controls">
-<input type="text" placeholder="Enter Lecturer Email Address"  name="email" class="span8 tip" required>
-</div>
-</div>
+			<form name="Lecturer" class="flex flex-col gap-y-5 w-full  max-w-xs" method="post">
+				<div class="w-full">
+					<label class="block" for="basicinput">Lecturer Full Name</label>
+					<input class="w-full p-2 border border-gray-300 rounded" placeholder="Enter Lecturer Fullname"  name="fullname" class="span8 tip" required>
+				</div>
+
+				<div class="w-full">	
+					<label class="block" for="basicinput">Lecturer Email Address</label>
+					<input class="w-full p-2 border border-gray-300 rounded" placeholder="Enter Lecturer Email Address"  name="email" class="span8 tip" required>
+				</div>
+
+				<div class="w-full">
+					<label class="block" for="basicinput">Password</label>
+					<input class="w-full p-2 border border-gray-300 rounded" type="text" placeholder="password"  name="code" class="span8 tip" required>											</div>
+				</div>
+
+				<button type="submit" name="submit" class="w-full border border-black p-2 max-w-xs mt-8">Create</button>
+			</form>
+	</div>
 
 
-<div class="control-group">
-											<label class="control-label" for="basicinput">Password</label>
-											<div class="controls">
-											<input type="text" placeholder="password"  name="code" class="span8 tip" required>											</div>
-										</div>
 
-	<div class="control-group">
-											<div class="controls">
-												<button type="submit" name="submit" class="btn">Create</button>
-											</div>
-										</div>
-									</form>
-							</div>
-						</div>
-
-
-	<div class="module">
-							<div class="module-head">
-								<h3>Manage Lectureres</h3>
-							</div>
-							<div class="module-body table">
-								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" width="100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Fullname</th>
-											<th>Email Address</th>
-											<th>Last Updated</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
+	<div class="p-8">
+		<div class="module-head">
+			<h3 class="text-xl font-bold mb-4">Manage Lecturers</h3>
+		</div>
+		<div class="overflow-x-scroll">
+			<table class="table-auto w-full" cellspacing="0" cellpadding="0" border="0" width="20rem">
+				<thead>
+					<tr>
+						<th class="text-left">#</th>
+						<th class="text-left">Fullname</th>
+						<th class="text-left">Email Address</th>
+					</tr>
+				</thead>
+				<tbody>
 
 <?php $query=mysqli_query($bd, "select * from lecturer");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
 ?>									
-										<tr>
+										<tr class="cursor-pointer">
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><?php echo htmlentities($row['fullName']);?></td>
 											<td><?php echo htmlentities($row['email']);?></td>
@@ -157,7 +148,7 @@ while($row=mysqli_fetch_array($query))
 	</div><!--/.wrapper-->
 
 <?php include('includes/footer.php');?>
-
+<!-- 
 	<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
 	<script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
 	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -171,6 +162,6 @@ while($row=mysqli_fetch_array($query))
 			$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
 			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
 		} );
-	</script>
+	</script> -->
 </body>
 <?php } ?>

@@ -21,6 +21,7 @@ if(isset($_POST['submit']))
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <title>CMS | User Registration</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -50,10 +51,13 @@ error:function (){}
 
   <body>
 	  <div id="login-page">
-	  	<div class="container">
-	  	
-		      <form class="form-login" method="post">
-		        <h2 class="form-login-heading">User Registration</h2>
+			<nav class="border-b border-black p-3 flex flex-col items-start sm:flex-row sm:items-center gap-x-5" role="navigation">
+        <h1 class="font-mono text-4xl font-bold">cms</h1>
+      </nav>
+
+	  	<div >
+		      <form class="mx-auto max-w-md py-10"  method="post">
+					<h2 class="text-center text-xl font-bold mb-4">User Registration</h2>
 		        <p style="padding-left: 1%; color: green">
 		        	<?php if($msg){
 echo htmlentities($msg);
@@ -61,22 +65,16 @@ echo htmlentities($msg);
 
 
 		        </p>
-		        <div class="login-wrap">
-				<input type="text" class="form-control" placeholder="Matric Num" name="matric" required="required" autofocus>
-		         <input type="text" class="form-control" placeholder="Full Name" name="fullname" required="required" autofocus>
-		            <br>
-		            <input type="email" class="form-control" placeholder="Email" id="email" onBlur="userAvailability()" name="email" required="required">
-		             <span id="user-availability-status1" style="font-size:12px;"></span>
-		            <br>
-		            <input type="password" class="form-control" placeholder="Password" required="required" name="password"><br >
-		            <br>
+						<div class="flex flex-col gap-y-5">
+							<input class="p-2 border border-gray-300" type="text" placeholder="Matric Num" name="matric" required="required" autofocus>
+							<input class="p-2 border border-gray-300" type="text" placeholder="Full Name" name="fullname" required="required" autofocus>
+							<input class="p-2 border border-gray-300 w-full" type="email" placeholder="Email" id="email" onBlur="userAvailability()" name="email" required="required">
+							<input class="p-2 border border-gray-300 w-full" type="password" placeholder="Password" required="required" name="password">
+							<button class="w-full bg-yellow-500 p-2 text-white font-bold rounded" type="submit" name="submit" id="submit"><i class="fa fa-user"></i> Register</button>
 		            
-		            <button class="btn btn-theme btn-block"  type="submit" name="submit" id="submit"><i class="fa fa-user"></i> Register</button>
-		            <hr>
-		            
-		            <div class="registration">
-		                Already Registered<br/>
-		                <a class="" href="login.php">
+		            <div>
+		                Already Registered
+		                <a class="underline" href="login.php">
 		                   Sign in
 		                </a>
 		            </div>
@@ -89,18 +87,5 @@ echo htmlentities($msg);
 	  	
 	  	</div>
 	  </div>
-
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <!--BACKSTRETCH-->
-    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
-    <script>
-        $.backstretch("assets/img/login-bg.jpg", {speed: 500});
-    </script>
-
-
   </body>
 </html>
