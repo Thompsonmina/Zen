@@ -12,8 +12,17 @@ check_login_lecturer();
 $host=$_SERVER['HTTP_HOST'];
 $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 
-echo print_r($_POST);
-if(isset($_GET['complaintid']))
+
+if (isset($_POST["submit"]))
+{
+  $sql = "update complaint set status = {$_POST['new_status']} where id = {$_GET['complaintid']}";
+  $query = mysqli_query($bd, $sql);
+    echo '<script> alert("Status has been successfully filled")</script>';
+    header("location:http://$host$uri/complaint_detail.php?complaintid={$_GET['complaintid']}");
+
+}
+
+else if(isset($_GET['complaintid']))
 {
     $complainid = $_GET["complaintid"];
     $query =  mysqli_query($bd, "SELECT c.id, c.complaint_text, c.status, s.FullName as stuFullName, s.id as studId, l.id as lecId, c.regDate, c.status, s.matric_number, l.fullName, co.code FROM complaint c JOIN student s ON c.student_id = s.id JOIN lecturer l ON c.lecturer_id = l.id JOIN course co ON c.course_id = co.id WHERE c.id = $complainid");
@@ -25,15 +34,6 @@ if(isset($_GET['complaintid']))
     }
 }
 
-else if (isset($_POST["submit"]))
-{
-  echo "huh";
-
-  echo $_POST['new_status'];
-    $query =  mysqli_query($bd, "update complaint set status {$_POST['new_status']} where id = '".$_GET['complaintid']."'");
-    echo '<script> alert("Status has been successfully filled")</script>';
-
-}
 
 else{
     echo "no permission";
@@ -115,7 +115,7 @@ else{
             
             </select>
 
-            <button class="w-full bg-yellow-500 p-2 text-white font-bold rounded" type="submit" name="submit" type="submit">Change Status</button>
+            <button class="w-full bg-yellow-500 p-2 text-white font-bold rounded" name="submit" type="submit">Change Status</button>
             </div>
           </form>		
 

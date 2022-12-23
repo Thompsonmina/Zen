@@ -13,7 +13,6 @@ $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 
 if(isset($_GET['complaintid']))
 {
-    echo "still here";
     $complainid = $_GET["complaintid"];
     $query =  mysqli_query($bd, "SELECT c.id, c.complaint_text, s.FullName as stuFullName, s.id as studId, c.regDate, c.status, s.matric_number, l.fullName, co.code FROM complaint c JOIN student s ON c.student_id = s.id JOIN lecturer l ON c.lecturer_id = l.id JOIN course co ON c.course_id = co.id WHERE c.id = $complainid");
     $complain_details = mysqli_fetch_array($query);
@@ -92,7 +91,7 @@ else{
             </p>
             <div class="flex flex-col gap-y-5">
             <label>Complaint Text</label>
-            <input class="p-2 border border-gray" type="text" readonly value="<?php echo "{$complain_details['complaint_text']}"?>" class="form-control">
+            <textarea rows="5" class="p-2 w-full border border-gray" type="text" readonly> <?php echo "{$complain_details['complaint_text']}"?></textarea>
             
             <label>Lecturer</label>
             <input class="p-2 border border-gray-300" type="text" readonly value="<?php echo "{$complain_details['fullName']}" ?>"  required autofocus>

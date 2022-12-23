@@ -94,8 +94,8 @@ else {
           </select>
 
           
-            <label class="col-sm-2 col-sm-2 control-label">Complaint Text </label>
-            <textarea class="p-2 border border-gray-300" name="complaint_text" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
+            <label class="block mt-6">Complaint Text </label>
+            <textarea rows="5" class="p-2 mb-4 border border-gray-300 w-full" name="complaint_text" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
             <button class="w-full bg-yellow-500 p-2 text-white font-bold rounded" name="submit" type="submit">Submit</button>
 
 		      </form>
