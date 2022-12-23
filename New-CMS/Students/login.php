@@ -59,7 +59,7 @@ header("location:http://$host$uri/$extra");
   </head>
 
   <body>
-    <nav class="border-b border-black p-3 flex flex-col items-start sm:flex-row sm:items-center gap-x-5" role="navigation">
+    <nav class="shadow p-3 flex flex-col items-start sm:flex-row sm:items-center gap-x-5" role="navigation">
       <a href="/New-CMS">
         <h1 class="font-mono text-4xl font-bold">cms</h1>
       </a>  

@@ -99,11 +99,9 @@ function displayLecturerSidebar($conn, $lecturer_id)
 
 	$html = <<<EOD
 	
-          <aside id="sidebar" class="h-screen w-2/5 sm:w-1/5 max-w-xs border-r border-black p-2">
+          <aside id="sidebar" class="h-screen w-2/5 bg-gray-800 text-white sm:w-1/5 max-w-xs border-r border-black p-2">
               <!-- sidebar menu start-->
               <ul class="flex flex-col gap-y-5" id="nav-accordion">
-              
-              	  	
                   <li class="mt">
                       <a href="dashboard.php">
                           <i class="fa fa-dashboard"></i>
