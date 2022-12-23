@@ -18,8 +18,6 @@ if(isset($_GET['complaintid']))
     $query =  mysqli_query($bd, "SELECT c.id, c.complaint_text, s.FullName as stuFullName, s.id as studId, c.regDate, c.status, s.matric_number, l.fullName, co.code FROM complaint c JOIN student s ON c.student_id = s.id JOIN lecturer l ON c.lecturer_id = l.id JOIN course co ON c.course_id = co.id WHERE c.id = $complainid");
     $complain_details = mysqli_fetch_array($query);
 
-   
-
     if ($complain_details['studId'] !== $_SESSION["id"]){
         echo "you do not have permission to view this";
         exit();
@@ -47,74 +45,85 @@ else{
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>CMS | Student Change Password</title>
+    <title>CMS | Complaint Details </title>
 
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
 
-  <section id="container" >
-     <?php include("includes/header.php");?>
-      <?php include("includes/sidebar.php");?>
-      <section id="main-content">
-          <section class="wrapper">
+  <?php include("includes/header.php");?>
 
+<section id="container" class="flex">
+<?php include("includes/sidebar.php");?>
+
+    <section id="main-content">
+        <section class="wrapper p-4">
+        <div class="row mt">
+          <div class="col-lg-12">
+                    <div class="content-panel">
+                        <section id="unseen">
           <?php
           if ($complain_details)
           {
           ?>
-          	<h3><i class="fa fa-angle-right"></i> Complaint Details</h3>
-          	
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-                  <div class="form-panel">
-  
+          	<h2> Complaint Details</h2>
+ 
+
+                         	
 
 
-                      <form class="form-horizontal style-form" method="post">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Complaint</label>
-                              <div class="col-sm-10">
-                                  <input readonly value=<?php echo "{$complain_details['complaint_text']}"?> class="form-control">
-                              </div>
 
-                              <label class="col-sm-2 col-sm-2 control-label">Lecturer</label>
-                              <div class="col-sm-10">
-                                  <input readonly name="password" value=<?php echo "{$complain_details['fullName']}" ?> required="required" class="form-control">
-                              </div>
+          <form class="mx-auto max-w-md py-10"  method="post">
+		        <p style="padding-left:4%; padding-top:2%;  color:red">
+		        	<?php
+                if(isset($errormsg)){
+                  echo htmlentities($errormsg);
+		        		}
+              ?>
+            </p>
 
-                              <label class="col-sm-2 col-sm-2 control-label">Course</label>
-                              <div class="col-sm-10">
-                                  <input readonly name="password" value=<?php echo "{$complain_details['stuFullName']}" ?> required="required" class="form-control">
-                              </div>
-                               <label class="col-sm-2 col-sm-2 control-label">Course</label>
-                              <div class="col-sm-10">
-                                  <input readonly name="password" value=<?php echo "{$complain_details['code']}" ?> required="required" class="form-control">
-                              </div>
+		        <p style="padding-left:4%; padding-top:2%;  color:green">
+		        	<?php
+                if(isset($msg)){
+                  echo htmlentities($msg);
+		        		}
+              ?>
+            </p>
+            <div class="flex flex-col gap-y-5">
+            <label>Complaint Text</label>
+            <input class="p-2 border border-gray" type="text" readonly value="<?php echo "{$complain_details['complaint_text']}"?>" class="form-control">
+            
+            <label>Lecturer</label>
+            <input class="p-2 border border-gray-300" type="text" readonly value="<?php echo "{$complain_details['fullName']}" ?>"  required autofocus>
 
-                          </div>
+            <label class="">Student:</label>
+            <input readonly value="<?php echo "{$complain_details['stuFullName']}" ?>" class="p-2 border border-gray-300" required >
+            
+            <label class="">Course</label>
+            <input readonly value="<?php echo "{$complain_details['code']}" ?>"  class="p-2 border border-gray-300" required placeholder="Password">
+            
+
+    <a class="w-full bg-yellow-500 p-2 text-white font-bold rounded" href=<?php echo "complaint_detail.php?delcomplaintid={$complain_details['id']}&delete=true"?> name="delete" class="btn btn-primary">Delete Complaint</a>
+    </div>
+          </form>	
 
                         
-
-                           <div class="col-sm-10" style="padding-left:25% ">
-<a href=<?php echo "complaint_detail.php?delcomplaintid={$complain_details['id']}&delete=true"?> name="delete" class="btn btn-primary">Delete Complaint</a>
-</div>
-</div>
-
-                          </form>
-                          </div>
-                          </div>
-                          </div>
-
                     <?php }?>
                           
-          	
-          	
+                    </section>
+                  </div><!-- /content-panel -->
+               </div><!-- /col-lg-4 -->			
+		  	</div><!-- /row -->
+		  	
+		  	
+
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
-  </section>
+    </section>
+
+
+         
 
   </body>
 </html>

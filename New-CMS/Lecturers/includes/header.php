@@ -4,7 +4,16 @@
 	</a> 
 	
 	<ul class="flex flex-col sm:flex-row gap-x-10 gap-y-2">
-		<li><a href="logout.php">Logout</a></li>
+		<li>
+			<?php $query=mysqli_query($bd, "select fullName from lecturer where email='".$_SESSION['login_lecturer']."'");
+			while($row=mysqli_fetch_array($query)) 
+			{
+			?> 
+            <h3 class="centered"><?php echo htmlentities($row['fullName']);?></h3>
+            <?php } ?>
+	</li>
+	<li><a href="logout.php">Logout</a></li>
+
 	</ul>
 	
 </nav>

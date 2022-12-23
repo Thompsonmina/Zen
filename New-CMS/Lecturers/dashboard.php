@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 ini_set ('display_errors', 1);
@@ -38,14 +39,13 @@ check_login_lecturer();
               <div class="bg-gray-100 rounded p-4 flex flex-col">
                   <?php 
            
-$status=1;
 function get_number_of_complaints_per_status($conn, $status, $lecturer_email){
   $sql = "SELECT * FROM complaint c JOIN lecturer l where status='$status' and l.id = c.lecturer_id and l.email = '$lecturer_email' ";
   $rt = mysqli_query($conn, $sql);
   $num_rows = mysqli_num_rows($rt);
   return $num_rows;
 }
-
+$status=1;
 $num_rows = get_number_of_complaints_per_status($bd, $status, $_SESSION['login_lecturer']);
 {?>
                   <p class="text-xl font-medium mb-4"><?php echo htmlentities($num_rows);?></p>

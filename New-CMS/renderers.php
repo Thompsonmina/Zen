@@ -100,10 +100,6 @@ function displayLecturerSidebar($conn, $lecturer_id)
 	$html = <<<EOD
 	
           <aside id="sidebar" class="h-screen w-2/5 sm:w-1/5 max-w-xs border-r border-black p-2">
-					<!-- <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p> -->
-
-					<h5 class="text-xl font-bold mb-6">$name</h5>
-
               <!-- sidebar menu start-->
               <ul class="flex flex-col gap-y-5" id="nav-accordion">
               

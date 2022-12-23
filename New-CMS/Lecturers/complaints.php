@@ -72,11 +72,6 @@ else{
       </section><!-- /MAIN CONTENT -->
     </section>
 
-    <?php include("includes/footer.php");?>
-
-    <!--common script for all pages-->
-    <script src="assets/js/common-scripts.js"></script>
-
     <!--script for this page-->
     
 

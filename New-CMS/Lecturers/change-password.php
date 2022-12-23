@@ -137,18 +137,8 @@ return true;
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
     </section>
-    <?php include("includes/footer.php");?>
 
-    <!--common script for all pages-->
-    <script src="assets/js/common-scripts.js"></script>
-  <script>
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>
+   
 
   </body>
 </html>

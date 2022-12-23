@@ -18,7 +18,7 @@ $lecturer=$_POST['lecturer'];
 $complaint_text=$_POST['complaint_text'];
 
 console_log("ok, here post $course $lecturer");
-$query = mysqli_query($bd, "select * from course_lecture WHERE course_id = $course and lecture_id = $lecturer");
+$query = mysqli_query($bd, "select * from course_lecturer WHERE course_id = $course and lecturer_id = $lecturer");
 $row=mysqli_fetch_array($query);
 if ($row > 0){
   console_log("this are th eissues");
@@ -53,101 +53,66 @@ else {
   </head>
 
   <body>
+  <?php include("includes/header.php");?>
 
-  <section id="container" >
-     <?php include("includes/header.php");?>
-      <?php include("includes/sidebar.php");?>
-      <section id="main-content">
-          <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Register Complaint</h3>
-          	
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-                  <div class="form-panel">
-                  	
+<section id="container" class="flex">
+<?php include("includes/sidebar.php");?>
 
-                      <?php if($successmsg)
-                      {?>
-                      <div class="alert alert-success alert-dismissable">
-                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <b>Well done!</b> <?php echo htmlentities($successmsg);?></div>
-                      <?php }?>
+    <section id="main-content">
+        <section class="wrapper p-4">
+          <h3 class="text-xl font-bold mb-6"><i class="fa fa-angle-right"></i>Complaints </h3>
+        <div class="row mt">
+          <div class="col-lg-12">
+                    <div class="content-panel">
+                        <section id="unseen">
 
-   <?php if($errormsg)
-                      {?>
-                      <div class="alert alert-danger alert-dismissable">
- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <b>Oh snap!</b> </b> <?php echo htmlentities($errormsg);?></div>
-                      <?php }?>
-
-                      <form class="form-horizontal style-form" method="post" name="complaint" enctype="multipart/form-data" >
-
-<div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Course</label>
-<div class="col-sm-4">
-<select name="course" id="course" class="form-control" onChange="" required="">
-<option value="">Select Course</option>
-<?php $sql=mysqli_query($bd, "select id,code from course ");
-while ($rw=mysqli_fetch_array($sql)) {
-  ?>
-  <option value="<?php echo htmlentities($rw['id']);?>"><?php echo htmlentities($rw['code']);?></option>
-<?php
-}
-?>
-</select>
- 
-</div>
- </div>
+            <form class="mx-auto max-w-md py-10" name="login" method="post">
+		        
+              <label class="">Lecturer</label>
+              <select name="lecturer" id="lecturer" class="form-control" onChange="" required="">
+              <option value="">Select Lecturer</option>
+              <?php $sql=mysqli_query($bd, "select id,fullName from lecturer ");
+              while ($rw=mysqli_fetch_array($sql)) {
+                ?>
+                <option value="<?php echo htmlentities($rw['id']);?>"><?php echo htmlentities($rw['fullName']);?></option>
+              <?php
+              }
+              ?>
+        </select>
 
 
+        <label class="col-sm-2 col-sm-2 control-label">Course</label>
+          <select name="course" id="course" class="form-control" onChange="" required="">
+          <option value="">Select Course</option>
+          <?php $sql=mysqli_query($bd, "select id,code from course ");
+          while ($rw=mysqli_fetch_array($sql)) {
+            ?>
+            <option value="<?php echo htmlentities($rw['id']);?>"><?php echo htmlentities($rw['code']);?></option>
+          <?php
+          }
+          ?>
+          </select>
+
+          
+            <label class="col-sm-2 col-sm-2 control-label">Complaint Text </label>
+            <textarea class="p-2 border border-gray-300" name="complaint_text" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
+            <button class="w-full bg-yellow-500 p-2 text-white font-bold rounded" name="submit" type="submit">Submit</button>
+
+		      </form>
+
+          </section>
+                  </div><!-- /content-panel -->
+               </div><!-- /col-lg-4 -->			
+		  	</div><!-- /row -->
+		  	
+		  	
+
+		</section><! --/wrapper -->
+      </section><!-- /MAIN CONTENT -->
+    </section>
 
 
-<div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Lecturer</label>
-<div class="col-sm-4">
-<select name="lecturer" id="lecturer" class="form-control" onChange="" required="">
-<option value="">Select Lecturer</option>
-<?php $sql=mysqli_query($bd, "select id,fullName from lecturer ");
-while ($rw=mysqli_fetch_array($sql)) {
-  ?>
-  <option value="<?php echo htmlentities($rw['id']);?>"><?php echo htmlentities($rw['fullName']);?></option>
-<?php
-}
-?>
-</select>
-</div>
-
-
-</div>
-
-
-
-<div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Complaint Text </label>
-<div class="col-sm-6">
-<textarea  name="complaint_text" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
-</div>
-</div>
-
-
-                          <div class="form-group">
-                           <div class="col-sm-10" style="padding-left:25% ">
-<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-</div>
-</div>
-
-          </form>
-          </div>
-          </div>
-          </div>
-                          
-          	
-          	
-		</section>
-      </section>
-  </section>
-	
-
+         
+        
   </body>
 </html>

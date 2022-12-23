@@ -3,19 +3,20 @@ session_start();
 error_reporting(0);
 include('../config.php');
 include("../utils.php");
+include("../renderers.php");
 
 
 
-check_login_user();
+
+check_login_lecturer();
 $host=$_SERVER['HTTP_HOST'];
 $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 
-
+echo print_r($_POST);
 if(isset($_GET['complaintid']))
 {
-    echo "still here";
     $complainid = $_GET["complaintid"];
-    $query =  mysqli_query($bd, "SELECT c.id, c.complaint_text, s.FullName as stuFullName, s.id as studId, l.id as lecId, c.regDate, c.status, s.matric_number, l.fullName, co.code FROM complaint c JOIN student s ON c.student_id = s.id JOIN lecturer l ON c.lecturer_id = l.id JOIN course co ON c.course_id = co.id WHERE c.id = $complainid");
+    $query =  mysqli_query($bd, "SELECT c.id, c.complaint_text, c.status, s.FullName as stuFullName, s.id as studId, l.id as lecId, c.regDate, c.status, s.matric_number, l.fullName, co.code FROM complaint c JOIN student s ON c.student_id = s.id JOIN lecturer l ON c.lecturer_id = l.id JOIN course co ON c.course_id = co.id WHERE c.id = $complainid");
     $complain_details = mysqli_fetch_array($query);
 
     if ($complain_details['lecId'] !== $_SESSION["id"]){
@@ -26,7 +27,10 @@ if(isset($_GET['complaintid']))
 
 else if (isset($_POST["submit"]))
 {
-    $query =  mysqli_query($bd, "update complaint set status {$_POST['new_status']} where id = '".$_POST['complaintid']."'");
+  echo "huh";
+
+  echo $_POST['new_status'];
+    $query =  mysqli_query($bd, "update complaint set status {$_POST['new_status']} where id = '".$_GET['complaintid']."'");
     echo '<script> alert("Status has been successfully filled")</script>';
 
 }
@@ -45,73 +49,76 @@ else{
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>CMS | Student Change Password</title>
+    <title>CMS | Lecturer Complaint</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
+          
+    <?php include("includes/header.php");?>
+    
+    <section class="flex" >
 
-  <section id="container" >
-     <?php include("includes/header.php");?>
-      <?php include("includes/sidebar.php");?>
-      <section id="main-content">
-          <section class="wrapper">
+<?php echo displayLecturerSidebar($bd, $_SESSION['id']);?>
+  <section id="main-content" class="flex-grow">
 
           <?php
           if ($complain_details)
           {
           ?>
-          	<h3><i class="fa fa-angle-right"></i> Complaint Details</h3>
           	
           	<!-- BASIC FORM ELELEMNTS -->
           	<div class="row mt">
           		<div class="col-lg-12">
                   <div class="form-panel">
   
+                  <form class="mx-auto max-w-md py-10"  method="post">
+		        <p style="padding-left:4%; padding-top:2%;  color:red">
+		        	<?php
+                if(isset($errormsg)){
+                  echo htmlentities($errormsg);
+		        		}
+              ?>
+            </p>
 
+		        <p style="padding-left:4%; padding-top:2%;  color:green">
+		        	<?php
+                if(isset($msg)){
+                  echo htmlentities($msg);
+		        		}
+              ?>
+            </p>
+            <div class="flex flex-col gap-y-5">
+            <label>Complaint</label>
+            <input class="p-2 border border-gray-300" type="text" readonly value="<?php echo "{$complain_details['complaint_text']}"?>" class="form-control">
+            
+            <label>Lecturer</label>
+            <input class="p-2 border border-gray-300" type="text" readonly value="<?php echo "{$complain_details['fullName']}" ?>"  required autofocus>
 
-                      <form class="form-horizontal style-form" method="post">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Complaint</label>
-                              <div class="col-sm-10">
-                                  <input readonly value=<?php echo "{$complain_details['complaint_text']}"?> class="form-control">
-                              </div>
+            <label class="">Student:</label>
+            <input readonly value="<?php echo "{$complain_details['stuFullName']}" ?>" class="p-2 border border-gray-300" required >
+            
+            <label class="">Course</label>
+            <input readonly value="<?php echo "{$complain_details['code']}" ?>"  class="p-2 border border-gray-300" required placeholder="Password">
+            
+            <select name="new_status" class="form-input block w-full py-2 px-3 leading-tight rounded-md bg-white border border-gray-300 focus:outline-none focus:shadow-outline-blue-300 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                <?php
+                    $query = mysqli_query($bd, "SELECT * from complaint_status");
+              while ($row = mysqli_fetch_assoc($query)) {
+                if ($row['id'] === $complain_details['status']){
+                  echo "<option selected value={$row['id']}>{$row['status']}</option>";
+                }
+              echo "<option value={$row['id']}>{$row['status']}</option>";
+              }
+                ?>
+            
+            </select>
 
-                              <label class="col-sm-2 col-sm-2 control-label">Lecturer</label>
-                              <div class="col-sm-10">
-                                  <input readonly name="password" value=<?php echo "{$complain_details['fullName']}" ?> required="required" class="form-control">
-                              </div>
+            <button class="w-full bg-yellow-500 p-2 text-white font-bold rounded" type="submit" name="submit" type="submit">Change Status</button>
+            </div>
+          </form>		
 
-                              <label class="col-sm-2 col-sm-2 control-label">Course</label>
-                              <div class="col-sm-10">
-                                  <input readonly name="password" value=<?php echo "{$complain_details['stuFullName']}" ?> required="required" class="form-control">
-                              </div>
-                               <label class="col-sm-2 col-sm-2 control-label">Course</label>
-                              <div class="col-sm-10">
-                                  <input readonly name="password" value=<?php echo "{$complain_details['code']}" ?> required="required" class="form-control">
-                              </div>
-
-                          </div>
-
-                          <div class="relative rounded-md shadow-sm">
-  <select name="new-status" class="form-input block w-full py-2 px-3 leading-tight rounded-md bg-white border border-gray-300 focus:outline-none focus:shadow-outline-blue-300 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-    <option>Option 1</option>
-    <option>Option 2</option>
-    <option>Option 3</option>
-  </select>
-  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-  </div>
-</div>
-
-
-                           <div class="col-sm-10" style="padding-left:25% ">
-<button name="submit" class="btn btn-primary">Change Status</a>
-</div>
-</div>
-
-                          </form>
                           </div>
                           </div>
                           </div>

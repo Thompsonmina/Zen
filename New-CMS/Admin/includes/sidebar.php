@@ -45,7 +45,7 @@
 		</ul>
 	</li>			
 	<li>
-		<a href="manage-students.php">
+		<a href="manage_students.php">
 			<i class="menu-icon icon-group"></i>
 			Manage Students
 		</a>

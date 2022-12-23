@@ -26,19 +26,17 @@ console_log("atta boy");
   </head>
 
   <body>
+  <?php include("includes/header.php");?>
+  <section class="flex" >
 
-  <section id="container" >
-<?php include("includes/header.php");?>
 <?php include("includes/sidebar.php");?>
-
-      <section id="main-content">
-          <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i>Your Complaint History</h3>
+<section id="main-content">
+          <section class="wrapper p-4">
+          	<h3 class="text-xl font-bold mb-6"><i class="fa fa-angle-right"></i>Complaints </h3>
 		  		<div class="row mt">
 			  		<div class="col-lg-12">
                       <div class="content-panel">
                           <section id="unseen">
-                          <?php console_log("huh") ?>
                           <?php 
                           $additional_where_clause = "s.matric_number = {$_SESSION['login']}";
                           echo displayComplaints($bd, 1, True, $additional_where_clause);?>
@@ -52,14 +50,9 @@ console_log("atta boy");
 		  	
 		  	
 
-		</section><! --/wrapper -->
+		</section>
       </section><!-- /MAIN CONTENT -->
-  </section>
-
-    <!-- js placed at the end of the document so the pages load faster -->
-  
-
-    <!--script for this page-->
+    </section>
     
 
   </body>
