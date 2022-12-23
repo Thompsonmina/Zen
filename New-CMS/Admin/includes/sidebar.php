@@ -1,4 +1,4 @@
-<ul class="h-screen w-2/5 bg-gray-800 text-white md:w-1/5 max-w-xs border-r border-black p-2 flex flex-col gap-y-5">
+<ul class="h-screen w-2/5 bg-gray-800 text-white md:w-1/5 max-w-xs border-r border-black p-4 flex flex-col gap-y-5">
 	<li>
 		<a href="complaints.php">
 			Manage Complaint

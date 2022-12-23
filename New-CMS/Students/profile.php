@@ -51,6 +51,7 @@ $errormsg="Profile not Updated !!";
 
         <section class="wrapper p-4 w-full">
         <div class="w-full">
+            <h1 class="text-xl font-bold">Profile</h1>
                         <section id="unseen" class="w-full">
                   	
 
