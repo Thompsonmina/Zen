@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include('../config.php');
@@ -6,11 +5,12 @@ include('../utils.php');
 
 check_login_admin();
 
-$currentTime = date( 'd-m-Y h:i:s A', time () );
+$currentTime = date('d-m-Y h:i:s A', time());
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,22 +20,23 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 	<script type="text/javascript">
 
-</script>
+	</script>
 </head>
+
 <body>
-<?php include('includes/header.php');?>
+	<?php include('includes/header.php'); ?>
 
 	<div class="wrapper">
-		<div >
+		<div>
 			<div class="row">
-<?php include('includes/sidebar.php');?>				
-			<div class="span9">
+				<?php include('includes/sidebar.php'); ?>
+				<div class="span9">
 					<div class="content">
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 </body>
