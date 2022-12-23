@@ -54,7 +54,11 @@ if(isset($_POST['submit']))
 			<form class="mx-auto max-w-md py-10" name="login" method="post">
 				<h2 class="text-center text-xl font-bold mb-4">Admin Sign In</h2>
 				<span style="color:red;" >
-					<?php echo htmlentities($_SESSION['errmsg']); ?>
+					<?php
+						if (isset($_SESSION['errmsg'])) {
+							echo htmlentities($_SESSION['errmsg']);
+						}
+					?>
 					<?php echo htmlentities($_SESSION['errmsg']="");?>
 				</span>
 				<div class="flex flex-col gap-y-5">

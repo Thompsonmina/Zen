@@ -5,29 +5,23 @@
 function displayComplaints($conn, $status, $all=False, $custom_query=""){
 	$status_map = array(1=> "Pending", 2 => "In Progress", 3 => "Closed");
 
-    $html_beginning = <<<'EOD'
+    $html_beginning = <<<EOD
     <div class="module">
-							<div class="module-head">
-								<h3>Complaints</h3>
+							<div class="mb-2">
+								<h3>Total Complaints: <span> ${status}</span></h3>
 							</div>
-							<div class="module-body table">
-
-
-							
-								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" >
+							<div class="overflow-x-scroll">
+								<table cellpadding="0" cellspacing="0" border="0" class="table-auto" >
 									<thead>
 										<tr>
-											<th>Complaint No</th>
-											<th> Complaint </th>
-											<th> Complainer's Matric</th>
-											<th> Lecturer's Name </th>
-											<th> Course Code</th>
-											<th>Reg Date</th>
-											<th>Status</th>
-											
-											<th>Action</th>
-											
-										
+											<th class="px-2">Complaint No</th>
+											<th class="px-2"> Complaint </th>
+											<th class="px-2"> Complainer's Matric</th>
+											<th class="px-2"> Lecturer's Name </th>
+											<th class="px-2"> Course Code</th>
+											<th class="px-2">Reg Date</th>
+											<th class="px-2">Status</th>
+											<th class="px-2">Action</th>
 										</tr>
 									</thead>
 								
@@ -35,7 +29,7 @@ function displayComplaints($conn, $status, $all=False, $custom_query=""){
 EOD;
 
 $stat = $status;
-echo $stat;
+// echo $stat;
 $query_str = "SELECT c.id, c.complaint_text, c.regDate, c.status, s.matric_number, l.fullName, co.code FROM complaint c JOIN student s ON c.student_id = s.id JOIN lecturer l ON c.lecturer_id = l.id JOIN course co ON c.course_id = co.id WHERE c.status = $stat";
 
 if ($all){
@@ -90,8 +84,6 @@ return $html_beginning.$table_data.$html_end;
 
 function displayLecturerSidebar($conn, $lecturer_id)
 {
-
-	
 	$query=mysqli_query($conn, "select fullName from lecturer where email='".$_SESSION['login_lecturer']."'");
 	$row=mysqli_fetch_array($query);
 	$name = $row["fullName"];
@@ -104,16 +96,17 @@ function displayLecturerSidebar($conn, $lecturer_id)
 	while($row=mysqli_fetch_assoc($query)){
 		$courses_links = $courses_links."<li><a  href="."complaints.php?courseid={$row['course_id']}".">{$row['code']}</a></li>";
 	}
-	echo "omo";
+
 	$html = <<<EOD
-	<aside>
-          <div id="sidebar"  class="nav-collapse ">
+	
+          <aside id="sidebar" class="h-screen w-2/5 sm:w-1/5 max-w-xs border-r border-black p-2">
+					<!-- <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p> -->
+
+					<h5 class="text-xl font-bold mb-6">$name</h5>
+
               <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
+              <ul class="flex flex-col gap-y-5" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
- 
-              	  <h5 class="centered">$name</h5>
               	  	
                   <li class="mt">
                       <a href="dashboard.php">
@@ -124,11 +117,11 @@ function displayLecturerSidebar($conn, $lecturer_id)
 
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="javascript:;" class="mb-5">
                           <i class="fa fa-cogs"></i>
                           <span>Account Setting</span>
                       </a>
-                      <ul class="sub">
+                      <ul class="ml-5 mt-3">
                           <li><a  href="change-password.php">Change Password</a></li>
                         
                       </ul>
@@ -147,8 +140,7 @@ function displayLecturerSidebar($conn, $lecturer_id)
                  
               </ul>
               <!-- sidebar menu end-->
-          </div>
-      </aside>
+						</aside>
 EOD;
 
 
