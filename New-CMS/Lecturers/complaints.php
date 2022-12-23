@@ -60,18 +60,15 @@ if (isset($_GET['courseid'])) {
 
 
               </section>
-            </div><!-- /content-panel -->
-          </div><!-- /col-lg-4 -->
-        </div><!-- /row -->
+            </div>
+          </div>
+        </div>
 
 
 
       </section>
     </section><!-- /MAIN CONTENT -->
   </section>
-
-  <!--script for this page-->
-
 
 </body>
 

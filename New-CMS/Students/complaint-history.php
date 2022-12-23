@@ -45,9 +45,9 @@ console_log("atta boy");
 
 
               </section>
-            </div><!-- /content-panel -->
-          </div><!-- /col-lg-4 -->
-        </div><!-- /row -->
+            </div>
+          </div>
+        </div>
 
 
 

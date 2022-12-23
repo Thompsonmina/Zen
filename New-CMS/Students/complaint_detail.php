@@ -62,11 +62,6 @@ if (isset($_GET['complaintid'])) {
                 ?>
                   <h2> Complaint Details</h2>
 
-
-
-
-
-
                   <form class="mx-auto max-w-md py-10" method="post">
                     <p style="padding-left:4%; padding-top:2%;  color:red">
                       <?php
@@ -105,11 +100,9 @@ if (isset($_GET['complaintid'])) {
                 <?php } ?>
 
               </section>
-            </div><!-- /content-panel -->
-          </div><!-- /col-lg-4 -->
-        </div><!-- /row -->
-
-
+            </div>
+          </div>
+        </div>
 
       </section>
     </section><!-- /MAIN CONTENT -->

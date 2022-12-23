@@ -48,7 +48,6 @@ if (isset($_POST['submit'])) {
         <!-- BASIC FORM ELELEMNTS -->
         <div class="w-full">
           <div class="form-panel">
-            <!-- <h4 class="mb"><i class="fa fa-angle-right"></i> Change Password</h4> -->
 
             <?php if (isset($successmsg)) { ?>
               <div class="alert alert-success alert-dismissable">

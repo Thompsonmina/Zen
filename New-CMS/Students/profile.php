@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 
             </form>
         </section>
-      </div><!-- /row -->
+      </div>
 
 
 

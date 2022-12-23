@@ -8,7 +8,6 @@
 
     </li>
 
-
     <a href="">
         <span>Account Settings</span>
     </a>
@@ -21,8 +20,6 @@
         </li>
         </li>
     </ul>
-    </li>
-    <li>
 
     <li class="w-full">
         <a href="register-complaint.php">

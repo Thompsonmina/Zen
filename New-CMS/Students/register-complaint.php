@@ -45,9 +45,6 @@ if (isset($_POST['submit'])) {
   <title>CMS | Register Complaint</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-
-
-
 </head>
 
 <body>
@@ -99,9 +96,9 @@ if (isset($_POST['submit'])) {
                 </form>
 
               </section>
-            </div><!-- /content-panel -->
-          </div><!-- /col-lg-4 -->
-        </div><!-- /row -->
+            </div>
+          </div>
+        </div>
 
 
 
