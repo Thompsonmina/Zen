@@ -49,12 +49,9 @@ $errormsg="Profile not Updated !!";
 <section id="container" class="flex">
 <?php include("includes/sidebar.php");?>
 
-    <section id="main-content">
-        <section class="wrapper p-4">
-        <div class="row mt">
-          <div class="col-lg-12">
-                    <div class="content-panel">
-                        <section id="unseen">
+        <section class="wrapper p-4 w-full">
+        <div class="w-full">
+                        <section id="unseen" class="w-full">
                   	
 
  <?php $query=mysqli_query($bd, "select * from student where matric_number='".$_SESSION['login']."'");
@@ -62,33 +59,34 @@ $errormsg="Profile not Updated !!";
  {
  ?>                     
 
-                      <form class="mx-auto max-w-md py-10" method="post" name="profile" >
+                      <form class="max-w-md py-10 w-full flex flex-col gap-y-5" method="post" name="profile" >
 
-<label>Full Name</label>
-<input class="p-2 border border-gray-300" required type="text" name="fullname" required="required" value="<?php echo htmlentities($row['fullName']);?>" class="form-control" >
- </div>
-<label>User Email </label>
-<input class="p-2 border border-gray-300" required  type="email" name="email" required="required" value="<?php echo htmlentities($row['userEmail']);?>" class="form-control">
+                      <div class="w-full">
+<label class="block">Full Name</label>
+<input class="w-full p-2 border border-gray-300" required type="text" name="fullname" required="required" value="<?php echo htmlentities($row['fullName']);?>" class="form-control" >
 </div>
- </div>
 
- <label>Matric Number</label>
-<input  class="p-2 border border-gray-300" required name="matric" required="required" value="<?php echo htmlentities($row['matric_number']);?>" class="form-control" readonly>
+<div>
+<label class="block">User Email </label>
+<input class="w-full p-2 border border-gray-300" required  type="email" name="email" required="required" value="<?php echo htmlentities($row['userEmail']);?>" class="form-control">
+</div>
+
+<div>
+ <label class="block">Matric Number</label>
+<input  class="w-full p-2 border border-gray-300" required name="matric" required="required" value="<?php echo htmlentities($row['matric_number']);?>" class="form-control" readonly>
 </div>
 
 <?php } ?>
 
-<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+<button type="submit" name="submit" class="w-full border border-black p-2 mt-4">Create</button>
+
 
                           </form>
-                          </section>
-                  </div><!-- /content-panel -->
-               </div><!-- /col-lg-4 -->			
+                          </section>		
 		  	</div><!-- /row -->
 		  	
 		  	
 
-		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
     </section>
 

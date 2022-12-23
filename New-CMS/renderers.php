@@ -127,7 +127,7 @@ function displayLecturerSidebar($conn, $lecturer_id)
                           <i class="fa fa-cogs"></i>
                           <span>Complaints</span>
                       </a>
-                      <ul class="sub">
+                      <ul class="sub pl-5">
 						$courses_links
                         
                       </ul>
