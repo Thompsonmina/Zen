@@ -16,7 +16,6 @@ if(isset($_POST['submit']))
   // $ret=mysqli_query($bd, "SELECT * FROM lecturer WHERE email='".$_POST['email']."' and password_hash='".md5($_POST['password'])."'");
   $num=mysqli_fetch_array($ret);
   
-  console_log("omo x 2".$ret);
   if($num>0)
   {
     console_log("omo");
@@ -40,7 +39,6 @@ if(isset($_POST['submit']))
     $errormsg="Invalid username or password";
     $extra="login.php";
     $uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-    header("location:http://$host$uri/$extra");
   }
 }
 ?>
@@ -73,7 +71,7 @@ if(isset($_POST['submit']))
 		        <h2 class="text-center text-xl font-bold">Lecturer Sign in</h2>
 		        <p style="padding-left:4%; padding-top:2%;  color:red">
 		        	<?php
-                if($errormsg){
+                if(isset($errormsg)){
                   echo htmlentities($errormsg);
 		        		}
               ?>
@@ -81,7 +79,7 @@ if(isset($_POST['submit']))
 
 		        <p style="padding-left:4%; padding-top:2%;  color:green">
 		        	<?php
-                if($msg){
+                if(isset($msg)){
                   echo htmlentities($msg);
 		        		}
               ?>

@@ -17,9 +17,8 @@ $sql=mysqli_query($bd, "SELECT password_hash FROM  lecturer where password_hash=
 $num=mysqli_fetch_array($sql);
 if($num>0)
 {
-    echo "update lecturer set password='" . md5($_POST['newpassword']) . " where email='" . $_SESSION['login_lecturer'] . "'";
  $con=mysqli_query($bd, "update lecturer set password_hash='".md5($_POST['newpassword'])."' where email='".$_SESSION['login_lecturer']."'");
-$successmsg="Password Changed Successfully !!";
+  $successmsg="Password Changed Successfully !!";
 }
 else
 {
@@ -39,14 +38,7 @@ $errormsg="Old Password not match !!";
 
     <title>CMS | Change Password</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
   <script type="text/javascript">
 function valid()
 {
@@ -80,106 +72,75 @@ return true;
   </head>
 
   <body>
+    <?php include("includes/header.php");?>
 
-  <section id="container" >
-     <?php include("includes/header.php");?>
+  <section id="container" class="flex" >
      <?php echo displayLecturerSidebar($bd, $_SESSION['id']);?>
-      <section id="main-content">
-          <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Change Password</h3>
+      <section id="main-content" class="w-full flex-grow">
+          <section class="p-4">
+          	<h3 class="text-xl font-bold mb-6"><i class="fa fa-angle-right"></i> Change Password</h3>
           	
           	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
+          	<div class="w-full">
                   <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Change Password</h4>
+                  	  <!-- <h4 class="mb"><i class="fa fa-angle-right"></i> Change Password</h4> -->
 
-                      <?php if($successmsg)
+                      <?php if(isset($successmsg))
                       {?>
                       <div class="alert alert-success alert-dismissable">
                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                       <b>Well done!</b> <?php echo htmlentities($successmsg);?></div>
                       <?php }?>
 
-   <?php if($errormsg)
+   <?php if(isset($errormsg))
                       {?>
                       <div class="alert alert-danger alert-dismissable">
  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <b>Oh snap!</b> </b> <?php echo htmlentities($errormsg);?></div>
+                      <b>Oh snap!</b> </b>
+                      <?php
+                        if (isset($errormsg)) {
+                          echo htmlentities($errormsg);
+                        }
+                      ?></div>
                       <?php }?>
 
 
-                      <form class="form-horizontal style-form" method="post" name="chngpwd" onSubmit="return valid();">
-                          <div class="form-group">
+                      <form class="flex flex-col gap-y-5 max-w-xs" method="post" name="chngpwd" onSubmit="return valid();">
+                          <div class="w-full">
                               <label class="col-sm-2 col-sm-2 control-label">Current Password</label>
                               <div class="col-sm-10">
-                                  <input type="password" name="password" required="required" class="form-control">
+                                <input class="w-full p-2 border border-gray-300 rounded" type="password" name="password" required="required" class="form-control">
                               </div>
                           </div>
 
 <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">New Password</label>
                               <div class="col-sm-10">
-                                  <input type="password" name="newpassword" required="required" class="form-control">
+                              <input class="w-full p-2 border border-gray-300 rounded" type="password" name="newpassword" required="required" class="form-control">
                               </div>
                           </div>
 
 <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Confirm Password</label>
                               <div class="col-sm-10">
-                                  <input type="password" name="confirmpassword" required="required" class="form-control">
+                              <input class="w-full p-2 border border-gray-300 rounded" type="password" name="confirmpassword" required="required" class="form-control">
                               </div>
                           </div>
-                          <div class="form-group">
-                           <div class="col-sm-10" style="padding-left:25% ">
-<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-</div>
-</div>
+
+                           <button type="submit" name="submit" class="w-full border border-black p-2 mt-4">Submit</button>
+
 
                           </form>
                           </div>
                           </div>
-                          </div>
-                          
-          	
           	
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
+    </section>
     <?php include("includes/footer.php");?>
-  </section>
-
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-
 
     <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
-
-    <!--script for this page-->
-    <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-
-	<!--custom switch-->
-	<script src="assets/js/bootstrap-switch.js"></script>
-	
-	<!--custom tagsinput-->
-	<script src="assets/js/jquery.tagsinput.js"></script>
-	
-	<!--custom checkbox & radio-->
-	
-	<script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-	
-	<script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-	
-	
-	<script src="assets/js/form-component.js"></script>    
-    
-    
   <script>
       //custom select box
 

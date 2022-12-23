@@ -7,8 +7,6 @@ include('../config.php');
 include("../utils.php");
 include("../renderers.php");
 
-
-
 check_login_lecturer();
 ?>
 <!DOCTYPE html>
@@ -19,51 +17,26 @@ check_login_lecturer();
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
+    
     <title>CMS | Dashboard</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
-    <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
     
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-
-    <script src="assets/js/chart-master/Chart.js"></script>
-    
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
 
-  <section id="container" >
-<?php include("includes/header.php");?>
-<?php echo displayLecturerSidebar($bd, $_SESSION['id']);?>
-  <section id="main-content">
-          <section class="wrapper">
+    <?php include("includes/header.php");?>
+    
+    <section class="flex" >
 
-              <div class="row">
-                  <div class="col-lg-9 main-chart">
-                  
-                  
-                  	<div class="col-md-2 col-sm-2 box0">
-                        <div>
-                 
-                  </div></div>
-                  	
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_news"></span>
-                                <?php 
+<?php echo displayLecturerSidebar($bd, $_SESSION['id']);?>
+  <section id="main-content" class="flex-grow">
+          <section class="wrapper p-4">
+
+              <h1 class="text-xl font-bold mb-6">Complaints</h1>
+              <div class="flex gap-x-5 gap-y-2 flex-wrap">  	
+              <div class="bg-gray-100 rounded p-4 flex flex-col">
+                  <?php 
            
 $status=1;
 function get_number_of_complaints_per_status($conn, $status, $lecturer_email){
@@ -75,44 +48,37 @@ function get_number_of_complaints_per_status($conn, $status, $lecturer_email){
 
 $num_rows = get_number_of_complaints_per_status($bd, $status, $_SESSION['login_lecturer']);
 {?>
-					  			<h3><?php echo htmlentities($num_rows);?></h3>
-                  			</div>
-					  			<p><?php echo htmlentities($num_rows);?> 
-                  Pending Complaints
-                </p>
-
-                  		</div>
-                      <?php }?>
+                  <p class="text-xl font-medium mb-4"><?php echo htmlentities($num_rows);?></p>
+                  <p>
+                    Pending
+                  </p>
+                </div>
+              <?php }?>
 
 
-                      <div class="col-md-2 col-sm-2 box0">
-                        <div class="box1">
-                  <span class="li_news"></span>
+                      <div class="bg-gray-100 rounded p-4 flex flex-col">                       
                     <?php 
 $status=2;                   
 $num_rows = get_number_of_complaints_per_status($bd, $status, $_SESSION['login_lecturer']);
 {?>
-                  <h3><?php echo htmlentities($num_rows);?></h3>
-                        </div>
-                  <p><?php echo htmlentities($num_rows);?>
-                  Complaints Being Looked At
-                </p>
-                      </div>
+                  <p class="text-xl font-medium mb-4"><?php echo htmlentities($num_rows);?></p>
+                  <p>
+                    Being looked at
+                  </p>
+                </div>
+                      
   <?php }?>
 
-                      <div class="col-md-2 col-sm-2 box0">
-                        <div class="box1">
-                  <span class="li_news"></span>
+                      <div class="bg-gray-100 rounded p-4 flex flex-col">
                        <?php 
 $status=3;                   
 $num_rows = get_number_of_complaints_per_status($bd, $status, $_SESSION['login_lecturer']);
 {?>
-                  <h3><?php echo htmlentities($num_rows);?></h3>
-                        </div>
-                  <p><?php echo htmlentities($num_rows);?>
-                    Closed Complaints
+                  <p class="text-xl font-medium mb-4"><?php echo htmlentities($num_rows);?></p>
+                  <p>
+                    Closed
                   </p>
-                      </div>
+                </div>
 
 <?php }?>
                   	
@@ -126,9 +92,11 @@ $num_rows = get_number_of_complaints_per_status($bd, $status, $_SESSION['login_l
 				
           </section>
       </section>
-<?php include("includes/footer.php");?>
-  </section>
 
+    </section>
+
+    <?php include("includes/footer.php");?>
+    
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/jquery-1.8.3.min.js"></script>

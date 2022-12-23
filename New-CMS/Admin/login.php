@@ -12,7 +12,9 @@ if(isset($_POST['submit']))
 	
 	if($num>0)
 	{
-		$extra="index.php";//
+		$extra="complaints.php";//
+		// TODO: Build dashboard page for admin
+		// $extra="index.php";//
 		$_SESSION['alogin']=$_POST['username'];
 		$_SESSION['id']=$num['id'];
 		console_log("location:http://$host$uri/$extra");
@@ -54,7 +56,11 @@ if(isset($_POST['submit']))
 			<form class="mx-auto max-w-md py-10" name="login" method="post">
 				<h2 class="text-center text-xl font-bold mb-4">Admin Sign In</h2>
 				<span style="color:red;" >
-					<?php echo htmlentities($_SESSION['errmsg']); ?>
+					<?php
+						if (isset($_SESSION['errmsg'])) {
+							echo htmlentities($_SESSION['errmsg']);
+						}
+					?>
 					<?php echo htmlentities($_SESSION['errmsg']="");?>
 				</span>
 				<div class="flex flex-col gap-y-5">

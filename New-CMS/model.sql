@@ -37,12 +37,12 @@ CREATE TABLE course (
   `code` varchar(255) NOT NULL
 );
 
-CREATE TABLE course_lecture (
+CREATE TABLE course_lecturer (
   `course_id` INT NOT NULL,
-  `lecture_id` INT NOT NULL,
-  PRIMARY KEY (course_id, lecture_id),
+  `lecturer_id` INT NOT NULL,
+  PRIMARY KEY (course_id, lecturer_id),
   FOREIGN KEY (course_id) REFERENCES course(id) ON DELETE CASCADE  ,
-  FOREIGN KEY (lecture_id) REFERENCES lecturer(id) ON DELETE CASCADE 
+  FOREIGN KEY (lecturer_id) REFERENCES lecturer(id) ON DELETE CASCADE 
 );
 
 CREATE TABLE student (
