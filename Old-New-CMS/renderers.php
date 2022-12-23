@@ -68,7 +68,7 @@ while($row=mysqli_fetch_assoc($query))
 										
 											<td><button type="button" class="btn btn-danger">{$status_map[$row['status']]}</button></td>
 											
-											<td>   <a href="complaint-details.php?cid={$row["id"]}"> View Details</a> 
+											<td>   <a href="complaint_details.php?complaintid={$row["id"]}"> View Details</a> 
 											</td>
 											</tr>
 EOD;

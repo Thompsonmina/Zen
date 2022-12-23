@@ -38,7 +38,6 @@ console_log("atta boy");
 			  		<div class="col-lg-12">
                       <div class="content-panel">
                           <section id="unseen">
-                            theym
                           <?php console_log("huh") ?>
                           <?php 
                           $additional_where_clause = "s.matric_number = {$_SESSION['login']}";
@@ -55,19 +54,10 @@ console_log("atta boy");
 
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
-<?php include("includes/footer.php");?>
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-
-
-    <!--common script for all pages-->
-    <script src="assets/js/common-scripts.js"></script>
+  
 
     <!--script for this page-->
     

@@ -35,7 +35,7 @@ function displayComplaints($conn, $status, $all=False, $custom_query=""){
 EOD;
 
 $stat = $status;
-echo $stat;
+// echo $stat;
 $query_str = "SELECT c.id, c.complaint_text, c.regDate, c.status, s.matric_number, l.fullName, co.code FROM complaint c JOIN student s ON c.student_id = s.id JOIN lecturer l ON c.lecturer_id = l.id JOIN course co ON c.course_id = co.id WHERE c.status = $stat";
 
 if ($all){
@@ -68,7 +68,7 @@ while($row=mysqli_fetch_assoc($query))
 										
 											<td><button type="button" class="btn btn-danger">{$status_map[$row['status']]}</button></td>
 											
-											<td>   <a href="complaint-details.php?cid={$row["id"]}"> View Details</a> 
+											<td>   <a href="complaint_detail.php?complaintid={$row["id"]}"> View Details</a> 
 											</td>
 											</tr>
 EOD;
