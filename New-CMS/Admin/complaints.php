@@ -62,8 +62,13 @@ else{
 			<div class="flex">
 				<?php include('includes/sidebar.php');?>
 
-				<div class="content">
-					<?php echo displayComplaints($bd, $status_name, $status_num, $all);?>
+				<div class="content p-4">
+					<h1 class="text-xl font-bold mb-6">
+						<?php echo $status_name; ?>
+						complaints
+					</h1>
+
+					<?php echo displayComplaints($bd, $status_num, $all);?>
 				</div><!--/.content-->
 			</div>
 		</div><!--/.container-->

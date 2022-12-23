@@ -12,7 +12,9 @@ if(isset($_POST['submit']))
 	
 	if($num>0)
 	{
-		$extra="index.php";//
+		$extra="complaints.php";//
+		// TODO: Build dashboard page for admin
+		// $extra="index.php";//
 		$_SESSION['alogin']=$_POST['username'];
 		$_SESSION['id']=$num['id'];
 		console_log("location:http://$host$uri/$extra");

@@ -1,9 +1,9 @@
-<ul class="h-screen w-2/5 max-w-xs border-r border-black p-2 flex flex-col gap-y-5">
+<ul class="h-screen w-2/5 md:w-1/5 max-w-xs border-r border-black p-2 flex flex-col gap-y-5">
 	<li>
 		<a href="complaints.php">
 			Manage Complaint
 		</a>
-		<ul class="pl-5 flex flex-col gap-y-2">
+		<ul class="pl-5 flex flex-col gap-y-2 mt-3">
 			<li>
 				<a href="complaints.php?status=Pending&status-num=1">
 					Pending Complaints

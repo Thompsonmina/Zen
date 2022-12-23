@@ -6,9 +6,9 @@ function displayComplaints($conn, $status, $all=False, $custom_query=""){
 	$status_map = array(1=> "Pending", 2 => "In Progress", 3 => "Closed");
 
     $html_beginning = <<<EOD
-    <div class="module">
+    <div>
 							<div class="mb-2">
-								<h3>Total Complaints: <span> ${status}</span></h3>
+								<h3>Total: <span> ${status}</span></h3>
 							</div>
 							<div class="overflow-x-scroll">
 								<table cellpadding="0" cellspacing="0" border="0" class="table-auto" >
