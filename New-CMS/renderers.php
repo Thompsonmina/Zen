@@ -110,7 +110,7 @@ function displayLecturerSidebar($conn, $lecturer_id)
                   </li>
 
 
-                  <li class="sub-menu">
+                  <li>
                       <a href="javascript:;" class="mb-5">
                           <i class="fa fa-cogs"></i>
                           <span>Account Setting</span>
@@ -120,7 +120,7 @@ function displayLecturerSidebar($conn, $lecturer_id)
                         
                       </ul>
                   </li>
-                  <li class="sub-menu">
+                  <li>
                       <a href="complaints.php" >
                           <i class="fa fa-cogs"></i>
                           <span>Complaints</span>

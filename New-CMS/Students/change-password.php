@@ -75,21 +75,21 @@ $errormsg="Old Password not match !!";
 
                       <form class="flex flex-col gap-y-5 max-w-xs" method="post" name="chngpwd" onSubmit="return valid();">
                           <div class="w-full">
-                              <label class="col-sm-2 col-sm-2 control-label">Current Password</label>
+                              <label class="">Current Password</label>
                               <div class="col-sm-10">
                                 <input class="w-full p-2 border border-gray-300 rounded" type="password" name="password" required="required" class="form-control">
                               </div>
                           </div>
 
 <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">New Password</label>
+                              <label class="">New Password</label>
                               <div class="col-sm-10">
                               <input class="w-full p-2 border border-gray-300 rounded" type="password" name="newpassword" required="required" class="form-control">
                               </div>
                           </div>
 
 <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Confirm Password</label>
+                              <label class="">Confirm Password</label>
                               <div class="col-sm-10">
                               <input class="w-full p-2 border border-gray-300 rounded" type="password" name="confirmpassword" required="required" class="form-control">
                               </div>
@@ -102,7 +102,7 @@ $errormsg="Old Password not match !!";
                           </div>
                           </div>
           	
-		</section><! --/wrapper -->
+		</section>
       </section><!-- /MAIN CONTENT -->
     </section>
 

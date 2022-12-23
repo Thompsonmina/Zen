@@ -36,21 +36,17 @@ if(isset($_GET['del']))
 	<title>Admin| Manage Course</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 
-	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link type="text/css" href="css/theme.css" rel="stylesheet">
-	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
-	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+
 </head>
 <body>
 <?php include('includes/header.php');?>
 
 	<div class="wrapper">
-		<div class="container">
+		<div >
 			<div class="flex">
 <?php include('includes/sidebar.php');?>				
 			<div class="span9 w-full">
-					<div class="content p-8">
+					<div class="p-8">
 
 						<div class="module">
 							<div class="module-head">
@@ -79,17 +75,17 @@ if(isset($_GET['del']))
 
 			<form class="flex flex-col gap-y-5 w-full max-w-xs" name="Course" method="post" >
 									
-<div class="control-group">
-<label class="control-label" for="basicinput">Course Title</label>
-<div class="controls">
+<div>
+<label for="basicinput">Course Title</label>
+<div>
 <input class="w-full p-2 border border-gray-300 rounded"type="text" placeholder="Enter Course Title"  name="name" class="span8 tip" required>
 </div>
 </div>
 
 
-<div class="control-group">
-											<label class="control-label" for="basicinput">Course Code</label>
-											<div class="controls">
+<div>
+											<label for="basicinput">Course Code</label>
+											<div>
 											<input class="w-full p-2 border border-gray-300 rounded" type="text" placeholder="Enter Course code"  name="code" class="span8 tip" required>											</div>
 										</div>
 
@@ -136,11 +132,11 @@ while($row=mysqli_fetch_array($query))
 
 						
 						
-					</div><!--/.content-->
-				</div><!--/.span9-->
+					</div>
+				</div>
 			</div>
-		</div><!--/.container-->
-	</div><!--/.wrapper-->
+		</div>
+	</div>
 
 <?php include('includes/footer.php');?>
 </body>

@@ -31,11 +31,11 @@ console_log("atta boy");
 
 <?php include("includes/sidebar.php");?>
 <section id="main-content">
-          <section class="wrapper p-4">
+          <section class="p-4">
           	<h3 class="text-xl font-bold mb-6"><i class="fa fa-angle-right"></i>Complaints </h3>
 		  		<div class="row mt">
 			  		<div class="col-lg-12">
-                      <div class="content-panel">
+                      <div>
                           <section id="unseen">
                           <?php 
                           $additional_where_clause = "s.matric_number = {$_SESSION['login']}";

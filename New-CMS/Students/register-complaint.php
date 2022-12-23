@@ -59,11 +59,11 @@ else {
 <?php include("includes/sidebar.php");?>
 
     <section id="main-content">
-        <section class="wrapper p-4">
+        <section class="p-4">
           <h3 class="text-xl font-bold mb-6"><i class="fa fa-angle-right"></i>Complaints </h3>
         <div class="row mt">
           <div class="col-lg-12">
-                    <div class="content-panel">
+                    <div>
                         <section id="unseen">
 
             <form class="mx-auto max-w-md py-10" name="login" method="post">
@@ -81,7 +81,7 @@ else {
         </select>
 
 
-        <label class="col-sm-2 col-sm-2 control-label">Course</label>
+        <label class="">Course</label>
           <select name="course" id="course" class="form-control" onChange="" required="">
           <option value="">Select Course</option>
           <?php $sql=mysqli_query($bd, "select id,code from course ");
@@ -107,7 +107,7 @@ else {
 		  	
 		  	
 
-		</section><! --/wrapper -->
+		</section>
       </section><!-- /MAIN CONTENT -->
     </section>
 

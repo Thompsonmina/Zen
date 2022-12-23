@@ -57,10 +57,10 @@ else{
 <?php include("includes/sidebar.php");?>
 
     <section id="main-content">
-        <section class="wrapper p-4">
+        <section class="p-4">
         <div class="row mt">
           <div class="col-lg-12">
-                    <div class="content-panel">
+                    <div>
                         <section id="unseen">
           <?php
           if ($complain_details)
@@ -117,7 +117,7 @@ else{
 		  	
 		  	
 
-		</section><! --/wrapper -->
+		</section>
       </section><!-- /MAIN CONTENT -->
     </section>
 

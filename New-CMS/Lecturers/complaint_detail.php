@@ -127,7 +127,7 @@ else{
                           
           	
           	
-		</section><! --/wrapper -->
+		</section>
       </section><!-- /MAIN CONTENT -->
   </section>
 

@@ -66,7 +66,7 @@ if(isset($_POST['submit']))
     </nav>
     
 	  <div id="login-page">
-	  	<div class="container">
+	  	<div >
 		      <form class="mx-auto max-w-md py-10" name="login" method="post">
 		        <h2 class="text-center text-xl font-bold">Lecturer Sign in</h2>
 		        <p style="padding-left:4%; padding-top:2%;  color:red">

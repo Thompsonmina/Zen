@@ -13,7 +13,7 @@
                   </li>
 
 
-                  <li class="sub-menu">
+                  <li>
                       <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
                           <span>Account Setting</span>
@@ -24,7 +24,7 @@
                         
                       </ul>
                   </li>
-                  <li class="sub-menu">
+                  <li>
                       <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
                           <span>Courses</span>
@@ -36,7 +36,7 @@
                       </ul>
                   </li>
                   
-                  <li class="sub-menu">
+                  <li>
                       <a href="complaint-history.php" >
                           <i class="fa fa-tasks"></i>
                           <span>Complaint History</span>

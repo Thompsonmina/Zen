@@ -26,16 +26,16 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 <?php include('includes/header.php');?>
 
 	<div class="wrapper">
-		<div class="container">
+		<div >
 			<div class="row">
 <?php include('includes/sidebar.php');?>				
 			<div class="span9">
 					<div class="content">
 						
-					</div><!--/.content-->
-				</div><!--/.span9-->
+					</div>
+				</div>
 			</div>
-		</div><!--/.container-->
-	</div><!--/.wrapper-->
+		</div>
+	</div>
 	
 </body>
